@@ -20,7 +20,7 @@ public class SilverFleet  extends Airplane implements IExtraServices{
 
     @Override
     public double flightFare() {
-        return 750;
+        return 4000;
     }
 
     public String toString() {
