@@ -7,7 +7,7 @@ import com.utn.tools.*;
 public abstract class Airplane {
     private Integer id;
     private double fullCapacity;
-    private final double costPerKM = 10.5;
+    private final double costPerKM = Math.random()*(150-300+1)+300; //Random 150 to 300
     private int maxPassengerCapacity;
     private double maxVelocity;
     private EPropulsionType EPropulsionType;

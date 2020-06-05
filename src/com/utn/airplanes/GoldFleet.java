@@ -18,7 +18,7 @@ public class GoldFleet extends Airplane implements IExtraServices {
 
     @Override
     public double flightFare() {
-        return 1000;
+        return 6000;
     }
 
 
