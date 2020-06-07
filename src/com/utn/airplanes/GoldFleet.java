@@ -2,6 +2,8 @@ package com.utn.airplanes;
 
 import com.utn.enums.*;
 
+import java.util.Random;
+
 public class GoldFleet extends Airplane implements IExtraServices {
 
     private boolean wifiOnBoard;
@@ -28,7 +30,7 @@ public class GoldFleet extends Airplane implements IExtraServices {
     }
 
     private boolean wifiOnBoard() {
-        return Math.random() % 2 == 0;
+        return new Random().nextBoolean();
     }
 
     public boolean isWifiOnBoard(){return wifiOnBoard;}

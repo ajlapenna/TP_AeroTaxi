@@ -43,6 +43,6 @@ public class Person {
 
     @Override
     public String toString() {
-        return name + ", lastName='" + lastName + '\'' +", dni='" + dni + '\'' +", age=" + age ;
+        return name + ", last name='" + lastName + '\'' +", dni='" + dni + '\'' +", age=" + age ;
     }
 }

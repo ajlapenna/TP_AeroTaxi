@@ -2,14 +2,14 @@ package com.utn.airplanes;
 
 import com.utn.enums.EPropulsionType;
 import com.utn.tools.*;
+import java.io.Serializable;
 
-
-public abstract class Airplane {
-    private Integer id;
-    private double fullCapacity;
-    private final double costPerKM = Math.random()*(150-300+1)+300; //Random 150 to 300
+public abstract class Airplane implements Serializable {
+    private String id;
+    private double fuelCapacity;
+    private double costPerKM=toolbox.costRandom(); //Random 150 to 300
     private int maxPassengerCapacity;
-    private double maxVelocity;
+    private double topSpeed;
     private EPropulsionType EPropulsionType;
     private int countFlights;
     private double flightFare; //(Tarifa del tipo de avión)
@@ -18,23 +18,23 @@ public abstract class Airplane {
     public Airplane() {
     }
 
-    public Airplane(double fullCapacity, int maxPassengerCapacity,
-                    double maxVelocity, EPropulsionType EPropulsionType) {
-        this.id = idHandler.setId();
-        this.fullCapacity = fullCapacity;
+    public Airplane(double fuelCapacity, int maxPassengerCapacity,
+                    double topSpeed, EPropulsionType EPropulsionType) {
+        this.id = toolbox.setId();
+        this.fuelCapacity = fuelCapacity;
         this.maxPassengerCapacity = maxPassengerCapacity;
-        this.maxVelocity = maxVelocity;
+        this.topSpeed = topSpeed;
         this.EPropulsionType = EPropulsionType;
         this.countFlights = 0;
 
     }
 
 
-    public int getId() {return this.id;}
+    public String getId() {return this.id;}
 
-    public double getFullCapacity() {return fullCapacity;}
+    public double getFuelCapacity() {return fuelCapacity;}
 
-    public void setFullCapacity(double fullCapacity) {this.fullCapacity = fullCapacity;}
+    public void setFuelCapacity(double fuelCapacity) {this.fuelCapacity = fuelCapacity;}
 
     public double getCostPerKM() {return costPerKM;}
 
@@ -44,9 +44,9 @@ public abstract class Airplane {
         this.maxPassengerCapacity = maxPassengerCapacity;
     }
 
-    public double getMaxVelocity() {return maxVelocity;}
+    public double getTopSpeed() {return topSpeed;}
 
-    public void setMaxVelocity(double maxVelocity) {this.maxVelocity = maxVelocity;}
+    public void setTopSpeed(double topSpeed) {this.topSpeed = topSpeed;}
 
     public String getEPropulsionType() {return EPropulsionType.getEngineType();}
 
@@ -54,7 +54,7 @@ public abstract class Airplane {
 
     public int getCountFlights() {return countFlights;}
 
-    //Para que luego podamos hacer un Top de las fleets mas bookeadas
+    //Para que podamos hacer un Top de las fleets mas bookeadas
     public void increaseCountFlights() {this.countFlights++;}
 
     public double getFlightFare(){return this.flightFare;}
@@ -66,11 +66,11 @@ public abstract class Airplane {
 
     @Override
     public String toString() {
-        return "Id=" + id.toString() +
-                ", fullCapacity=" + fullCapacity +
+        return "Id=" + id+
+                ", fullCapacity=" + fuelCapacity +
                 ", costPerKM=" + costPerKM +
-                ", maxPassengerCapacity=" + maxPassengerCapacity +
-                ", maxVelocity=" + maxVelocity +
-                ", EPropulsionType=" + EPropulsionType;
+                ", passengerCapacity=" + maxPassengerCapacity +
+                ", topSpeed=" + topSpeed +
+                ", propulsionType=" + EPropulsionType;
     }
 }

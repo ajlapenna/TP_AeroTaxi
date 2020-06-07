@@ -1,10 +1,12 @@
 package com.utn.passenger;
 
 import com.utn.aerotaxi.Flight;
+
+import java.io.Serializable;
 import java.util.ArrayList;
 
 
-public class Passenger extends Person{
+public class Passenger extends Person implements Serializable {
 
     private double totalSpend;
     private String bestAirplane;
@@ -30,5 +32,7 @@ public class Passenger extends Person{
     public void setBestAirplane(String bestAirplane){/*TODO*/}
 
     @Override
-    public String toString() {return super.toString() +", totalSpend=$" + totalSpend + ", bestAirplane='" + bestAirplane + '\'';}
+    public String toString() {return super.toString()
+            +((bestAirplane!=null)? ", Total spend=$" + totalSpend + ", bestAirplane=" + bestAirplane:
+            ", Without flights.");}
 }
