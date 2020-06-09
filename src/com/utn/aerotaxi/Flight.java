@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.LinkedList;
 
 public class Flight {
+
     private int id;
     private Airplane airplane;
     private ECities departureCity;
