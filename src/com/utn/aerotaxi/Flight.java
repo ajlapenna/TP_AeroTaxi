@@ -5,28 +5,29 @@ import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
 
+import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Flight {
-
-    private int id;
+public class Flight implements Serializable {
+    private String id;
     private Airplane airplane;
     private ECities departureCity;
     private ECities arrivalCity;
     private int distance;
-    private Date departing;
+    private LocalDate departing;
     private LinkedList<Passenger> passengers=new LinkedList<>();
-    private static int countOfPassengers=0;
+    private static int countOfPassengers=1;
 
     public Flight(){}
 
-    public Flight(int id, Airplane airplane, ECities departureCity,
-                  ECities arrivalCity, Date departing, int numberOfCompanions) {
+    public Flight(Airplane airplane, ECities departureCity,
+                  ECities arrivalCity, LocalDate departing, int numberOfCompanions) {
         if(airplane !=null) {
             //if is enough space on the flight
             if ((countOfPassengers + (numberOfCompanions + 1)) < airplane.getMaxPassengerCapacity()) {
-                this.id = idHandler.setId();
+                this.id = toolbox.setId();
                 this.airplane = airplane;
                 this.departureCity = departureCity;
                 this.arrivalCity = arrivalCity;
@@ -53,7 +54,7 @@ public class Flight {
 
     public int getDistance(){return this.distance;}
 
-    public Airplane getAirplane(){return airplane;}
+    public Airplane getAirplane(){return this.airplane;}
 
     public LinkedList<Passenger> getPassengers() {
         return passengers;
@@ -65,5 +66,18 @@ public class Flight {
             return true;
         }
         else return false;
+    }
+
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id='" + id + '\'' +
+                ", airplane=" + airplane +
+                ", departureCity=" + departureCity +
+                ", arrivalCity=" + arrivalCity +
+                ", distance=" + distance +
+                ", departing=" + departing +
+                ", passengers=" + passengers +
+                '}';
     }
 }
