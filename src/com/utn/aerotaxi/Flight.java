@@ -5,6 +5,8 @@ import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
 
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -15,14 +17,14 @@ public class Flight {
     private ECities departureCity;
     private ECities arrivalCity;
     private int distance;
-    private Date departing;
+    private LocalDate departing;
     private LinkedList<Passenger> passengers=new LinkedList<>();
     private static int countOfPassengers=0;
 
     public Flight(){}
 
     public Flight(int id, Airplane airplane, ECities departureCity,
-                  ECities arrivalCity, Date departing, int numberOfCompanions) {
+                  ECities arrivalCity, LocalDate departing, int numberOfCompanions) {
         if(airplane !=null) {
             //if is enough space on the flight
             if ((countOfPassengers + (numberOfCompanions + 1)) < airplane.getMaxPassengerCapacity()) {
@@ -65,5 +67,9 @@ public class Flight {
             return true;
         }
         else return false;
+    }
+
+    public LocalDate getDeparting() {
+        return this.departing;
     }
 }
