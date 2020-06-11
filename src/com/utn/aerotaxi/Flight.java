@@ -5,30 +5,38 @@ import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
 
+<<<<<<< HEAD
 import java.time.LocalDate;
 import java.time.OffsetDateTime;
+=======
+import java.io.Serializable;
+import java.time.LocalDate;
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
 import java.util.Date;
 import java.util.LinkedList;
 
-public class Flight {
-
-    private int id;
+public class Flight implements Serializable {
+    private String id;
     private Airplane airplane;
     private ECities departureCity;
     private ECities arrivalCity;
     private int distance;
     private LocalDate departing;
     private LinkedList<Passenger> passengers=new LinkedList<>();
-    private static int countOfPassengers=0;
+    private static int countOfPassengers=1;
 
     public Flight(){}
 
+<<<<<<< HEAD
     public Flight(int id, Airplane airplane, ECities departureCity,
+=======
+    public Flight(Airplane airplane, ECities departureCity,
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
                   ECities arrivalCity, LocalDate departing, int numberOfCompanions) {
         if(airplane !=null) {
             //if is enough space on the flight
             if ((countOfPassengers + (numberOfCompanions + 1)) < airplane.getMaxPassengerCapacity()) {
-                this.id = idHandler.setId();
+                this.id = toolbox.setId();
                 this.airplane = airplane;
                 this.departureCity = departureCity;
                 this.arrivalCity = arrivalCity;
@@ -55,7 +63,7 @@ public class Flight {
 
     public int getDistance(){return this.distance;}
 
-    public Airplane getAirplane(){return airplane;}
+    public Airplane getAirplane(){return this.airplane;}
 
     public LinkedList<Passenger> getPassengers() {
         return passengers;
@@ -69,7 +77,21 @@ public class Flight {
         else return false;
     }
 
+<<<<<<< HEAD
     public LocalDate getDeparting() {
         return this.departing;
+=======
+    @Override
+    public String toString() {
+        return "Flight{" +
+                "id='" + id + '\'' +
+                ", airplane=" + airplane +
+                ", departureCity=" + departureCity +
+                ", arrivalCity=" + arrivalCity +
+                ", distance=" + distance +
+                ", departing=" + departing +
+                ", passengers=" + passengers +
+                '}';
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
     }
 }
