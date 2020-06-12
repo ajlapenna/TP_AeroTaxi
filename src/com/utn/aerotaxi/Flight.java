@@ -5,8 +5,13 @@ import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
 
+<<<<<<< HEAD
+import java.time.LocalDate;
+import java.time.OffsetDateTime;
+=======
 import java.io.Serializable;
 import java.time.LocalDate;
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
 import java.util.Date;
 import java.util.LinkedList;
 
@@ -22,7 +27,11 @@ public class Flight implements Serializable {
 
     public Flight(){}
 
+<<<<<<< HEAD
+    public Flight(int id, Airplane airplane, ECities departureCity,
+=======
     public Flight(Airplane airplane, ECities departureCity,
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
                   ECities arrivalCity, LocalDate departing, int numberOfCompanions) {
         if(airplane !=null) {
             //if is enough space on the flight
@@ -68,6 +77,10 @@ public class Flight implements Serializable {
         else return false;
     }
 
+<<<<<<< HEAD
+    public LocalDate getDeparting() {
+        return this.departing;
+=======
     @Override
     public String toString() {
         return "Flight{" +
@@ -79,5 +92,6 @@ public class Flight implements Serializable {
                 ", departing=" + departing +
                 ", passengers=" + passengers +
                 '}';
+>>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
     }
 }
