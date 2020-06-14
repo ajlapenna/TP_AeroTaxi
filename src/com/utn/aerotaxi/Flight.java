@@ -5,15 +5,10 @@ import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
 
-<<<<<<< HEAD
-import java.time.LocalDate;
-import java.time.OffsetDateTime;
-=======
 import java.io.Serializable;
 import java.time.LocalDate;
->>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
-import java.util.Date;
 import java.util.LinkedList;
+
 
 public class Flight implements Serializable {
     private String id;
@@ -22,65 +17,77 @@ public class Flight implements Serializable {
     private ECities arrivalCity;
     private int distance;
     private LocalDate departing;
-    private LinkedList<Passenger> passengers=new LinkedList<>();
-    private static int countOfPassengers=1;
+    private LinkedList<Passenger> passengers = new LinkedList<>();   ///<!--los tomamos desde los tickets
+    private LinkedList<FlightTicket> flightTickets = new LinkedList<>();
+    private static int countOfPassengers = 1;
+    private boolean isGone;///<!--- Despego?
 
-    public Flight(){}
+    public Flight() {
+    }
 
-<<<<<<< HEAD
-    public Flight(int id, Airplane airplane, ECities departureCity,
-=======
     public Flight(Airplane airplane, ECities departureCity,
->>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
-                  ECities arrivalCity, LocalDate departing, int numberOfCompanions) {
-        if(airplane !=null) {
-            //if is enough space on the flight
-            if ((countOfPassengers + (numberOfCompanions + 1)) < airplane.getMaxPassengerCapacity()) {
-                this.id = toolbox.setId();
-                this.airplane = airplane;
-                this.departureCity = departureCity;
-                this.arrivalCity = arrivalCity;
-                this.departing = departing;
-                this.distance = setDistance();
-            }
+                  ECities arrivalCity, LocalDate departing) {
+        if (airplane != null) {
+            this.id = toolbox.setId();
+            this.airplane = airplane;
+            this.departureCity = departureCity;
+            this.arrivalCity = arrivalCity;
+            this.departing = departing;
+            this.distance = setDistance();
+            this.isGone = false;
         }
     }
 
     private int setDistance() {
-        return ((departureCity==ECities.BSAS && arrivalCity==ECities.CBA)||
-                (departureCity==ECities.CBA &&arrivalCity==ECities.BSAS))? 695:
-                ((departureCity==ECities.BSAS && arrivalCity==ECities.SANTCHILE)||
-                (departureCity==ECities.SANTCHILE &&arrivalCity==ECities.BSAS))? 1400:
-                        ((departureCity==ECities.BSAS && arrivalCity==ECities.MONTVIDE)||
-                        (departureCity==ECities.MONTVIDE &&arrivalCity==ECities.BSAS))? 950:
-                                ((departureCity==ECities.CBA && arrivalCity==ECities.MONTVIDE)||
-                                        (departureCity==ECities.MONTVIDE &&arrivalCity==ECities.CBA))? 1190:
-                                        ((departureCity==ECities.CBA && arrivalCity==ECities.SANTCHILE)||
-                                                (departureCity==ECities.SANTCHILE &&arrivalCity==ECities.CBA))? 1050:
-                                                ((departureCity==ECities.MONTVIDE && arrivalCity==ECities.SANTCHILE)||
-                                                        (departureCity==ECities.SANTCHILE &&arrivalCity==ECities.MONTVIDE))? 2100:0;
+        return ((departureCity == ECities.BSAS && arrivalCity == ECities.CBA) ||
+                (departureCity == ECities.CBA && arrivalCity == ECities.BSAS)) ? 695 :
+                ((departureCity == ECities.BSAS && arrivalCity == ECities.SANTCHILE) ||
+                        (departureCity == ECities.SANTCHILE && arrivalCity == ECities.BSAS)) ? 1400 :
+                        ((departureCity == ECities.BSAS && arrivalCity == ECities.MONTVIDE) ||
+                                (departureCity == ECities.MONTVIDE && arrivalCity == ECities.BSAS)) ? 950 :
+                                ((departureCity == ECities.CBA && arrivalCity == ECities.MONTVIDE) ||
+                                        (departureCity == ECities.MONTVIDE && arrivalCity == ECities.CBA)) ? 1190 :
+                                        ((departureCity == ECities.CBA && arrivalCity == ECities.SANTCHILE) ||
+                                                (departureCity == ECities.SANTCHILE && arrivalCity == ECities.CBA)) ? 1050 :
+                                                ((departureCity == ECities.MONTVIDE && arrivalCity == ECities.SANTCHILE) ||
+                                                        (departureCity == ECities.SANTCHILE && arrivalCity == ECities.MONTVIDE)) ? 2100 : 0;
     }
 
-    public int getDistance(){return this.distance;}
+    public int getDistance() {
+        return this.distance;
+    }
 
-    public Airplane getAirplane(){return this.airplane;}
+    public Airplane getAirplane() {
+        return this.airplane;
+    }
 
     public LinkedList<Passenger> getPassengers() {
         return passengers;
     }
 
-    public boolean setPassengers(LinkedList<Passenger> passengers) {
-        if (countOfPassengers<= airplane.getMaxPassengerCapacity()) {
-            this.passengers = passengers;
-            return true;
+    /**
+     * Add a flight ticket if the amount of passengers from the ticket is less
+     * than the maximum capacity of the airplane.
+     * @param ticket = Current ticket
+     * @return TRUE = flight ticket added.
+     *  FALSE = flight ticket doesn't added
+     */
+    public boolean addFlightTicket(FlightTicket ticket) {
+        if (ticket == null) {
+            return false;
+        } else {
+            if (ticket.getNumberOfPassengers() + countOfPassengers < airplane.getMaxPassengerCapacity()) {
+                flightTickets.add(ticket);
+                passengers.add(ticket.getMainPassenger());
+                return true;
+            } else return false;
         }
-        else return false;
     }
 
-<<<<<<< HEAD
     public LocalDate getDeparting() {
         return this.departing;
-=======
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
@@ -92,6 +99,5 @@ public class Flight implements Serializable {
                 ", departing=" + departing +
                 ", passengers=" + passengers +
                 '}';
->>>>>>> 9fce2895a9ff8689be4c106b776eb0cb917f4085
     }
 }
