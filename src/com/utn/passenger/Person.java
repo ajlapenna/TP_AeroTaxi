@@ -1,6 +1,8 @@
 package com.utn.passenger;
 
-public class Person {
+import java.io.Serializable;
+
+public class Person implements Serializable {
     private String username; //login?
     private String password;  //login?
     private String name;

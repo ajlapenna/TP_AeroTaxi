@@ -6,7 +6,7 @@ import com.utn.passenger.Passenger;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-import java.util.Date;
+
 
 public class FlightTicket implements Serializable {
     private Flight flight;

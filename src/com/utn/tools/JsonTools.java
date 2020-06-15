@@ -1,9 +1,18 @@
 package com.utn.tools;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 
+import com.fasterxml.jackson.databind.MapperFeature;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
+import com.utn.aerotaxi.Flight;
+import com.utn.airplanes.Airplane;
+import com.utn.passenger.Passenger;
 import java.io.*;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -18,7 +27,10 @@ public class JsonTools {
     public static final String fflights = "resources/flights.json";
 
     //Constant of a ObjectMapper
-    private static final ObjectMapper JSON_MAPPER = new ObjectMapper();
+    private static ObjectMapper JSON_MAPPER = null;
+
+    private JsonTools() {
+    }
 
     /**
      * Write a JSON file of a given list of Objects
@@ -26,20 +38,22 @@ public class JsonTools {
      * @param list {@link List} The source list
      * @param path {@link String}Path of the file
      */
-    public static <t> void writePassengerJson(List<t> list, String path) {
-        if (list == null) System.out.println("E R R O R passengers cant be null");
+    public static <t> void writeJson(List<t> list, String path) {
+        if (list == null) System.out.println("E R R O R list cant be null");
         else {
-            OutputStream buffer = null;
+            BufferedWriter buffer = null;
             try {
-                buffer = new FileOutputStream(new File(path));
+                buffer = new BufferedWriter(new FileWriter(new File(path)));
             } catch (IOException ex) {
-                System.out.println(ex.getLocalizedMessage());
+                System.out.println(ex.getMessage());
             }
-            try {
-                JSON_MAPPER.writeValue(buffer, list);
-                buffer.close();
-            } catch (IOException ex) {
-                System.out.println(ex.getLocalizedMessage());
+            if (buffer != null) {
+                try {
+                    getMapper().writerWithDefaultPrettyPrinter().writeValue(buffer, list);
+                    buffer.close();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
         }
     }
@@ -51,10 +65,10 @@ public class JsonTools {
      * @param tClass {@link Class} of the objects in the list
      * @return {@link LinkedList} of the objects in the JSON
      */
-    public static <T> List<T> readPassengerJson(String path, Class<T> tClass) {
-        InputStream buffer = null;
+    public static <T> List<T> readJson(String path, Class<T> tClass) {
+        BufferedReader buffer = null;
         try {
-            buffer = new FileInputStream(new File(path));
+            buffer = new BufferedReader(new FileReader(new File(path)));
         } catch (IOException ex) {
             System.out.println("E R R O R : " + ex.getMessage());
         }
@@ -62,13 +76,41 @@ public class JsonTools {
         List<T> list = null;
         if (buffer != null) {
             try {
-                //passengers = JSON_MAPPER.readValue(buffer, new TypeReference<LinkedList<Passenger>>() {
-                list = JSON_MAPPER.readValue(buffer,
-                        JSON_MAPPER.getTypeFactory().constructCollectionType(LinkedList.class, tClass));
-            } catch (IOException | IllegalArgumentException ex) {
+                CollectionType listType = getMapper().getTypeFactory().
+                        constructCollectionType(LinkedList.class, tClass);
+                list = getMapper().readValue(buffer, listType);
+            } catch (IOException ex) {
                 System.out.println("E R R O R : " + ex.getMessage());
+//                ex.printStackTrace();
             }
         }
         return list;
+    }
+
+    /**
+     * PolymorphicTypeValidator that is used to determined whether given subtype is allowed
+     * to be deserialized. Configurable standard implementation, BasicPolymorphicTypeValidator
+     * is included for convenience: it supports common “allow list” approach.
+     * (See <a href="https://medium.com/@cowtowncoder/jackson-2-10-features-cd880674d8a2">
+     * * this article</a> for full explanation).
+     */
+    private static final PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
+            .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Passenger.class)
+            .allowIfBaseType(LinkedList.class).allowIfBaseType(List.class).allowIfBaseType(LocalDate.class).build();
+
+    /**
+     * Black magic to create a ObjectMapper.
+     *
+     * @return ObjectMapper
+     */
+    public static ObjectMapper getMapper() {
+        if (JSON_MAPPER == null) {
+            JSON_MAPPER = new ObjectMapper();
+            JSON_MAPPER.registerModule(new JavaTimeModule());
+            JSON_MAPPER.enable(MapperFeature.BLOCK_UNSAFE_POLYMORPHIC_BASE_TYPES);
+            JSON_MAPPER.activateDefaultTyping(ptv, ObjectMapper.DefaultTyping.NON_FINAL);
+        }
+        return JSON_MAPPER;
+
     }
 }

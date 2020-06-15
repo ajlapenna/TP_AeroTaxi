@@ -1,21 +1,18 @@
 package com.utn.passenger;
 
 import com.utn.aerotaxi.Flight;
-
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Objects;
 
 
-public class Passenger extends Person implements Serializable {
+public class Passenger extends Person{
     private double totalSpend;
     private String bestAirplane;
     private ArrayList<Flight> flights = new ArrayList<>();
 
     //Constructor//
-    public Passenger() {
-    }
-
+    public Passenger() {}
     public Passenger(String name, String lastName, String dni, int age) {
         super(name, lastName, dni, age);
     }
@@ -45,8 +42,9 @@ public class Passenger extends Person implements Serializable {
     @Override
     public String toString() {
         return super.toString()
-                + ((bestAirplane != null) ? ", Total spend=$" + totalSpend + ", bestAirplane=" + bestAirplane :
-                ", Without flights.");
+                + ((bestAirplane != null) ?
+                ", Total spend=$" + totalSpend + ", bestAirplane=" + bestAirplane
+                :", Without flights.");
     }
 
     @Override
@@ -63,6 +61,4 @@ public class Passenger extends Person implements Serializable {
     public int hashCode() {
         return Objects.hash(getDni(), getLastName(), getName());
     }
-
-
 }

@@ -1,12 +1,18 @@
 package com.utn.enums;
 
-public enum EPropulsionType {
-    REACTION("Reaction Engine"), PROPELLER("Propeller Engine"), PISTON("Piston Engine");
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonValue;
 
+import java.io.Serializable;
+
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
+public enum EPropulsionType implements Serializable {
+    REACTION("Reaction Engine"), PROPELLER("Propeller Engine"), PISTON("Piston Engine");
 
     private String engineType;
 
-    EPropulsionType(String engineType){this.engineType=engineType;}
+    private EPropulsionType(String engineType){this.engineType=engineType;}
 
+    @JsonValue
     public String getEngineType(){return this.engineType;}
 }

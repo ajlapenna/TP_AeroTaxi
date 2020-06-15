@@ -1,12 +1,13 @@
 package com.utn.airplanes;
 
 import com.utn.enums.*;
-
 import java.util.Random;
+
 
 public class GoldFleet extends Airplane implements IExtraServices {
 
     private boolean wifiOnBoard;
+
 
     public GoldFleet() {
     }

@@ -1,6 +1,6 @@
 package com.utn.airplanes;
 
-public interface IExtraServices {
+public interface IExtraServices{
 
     String cateringService();
 

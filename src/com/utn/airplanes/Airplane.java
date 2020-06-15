@@ -4,6 +4,7 @@ import com.utn.enums.EPropulsionType;
 import com.utn.tools.*;
 import java.io.Serializable;
 
+
 public abstract class Airplane implements Serializable {
     private String id;
     private double fuelCapacity;
