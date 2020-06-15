@@ -1,18 +1,19 @@
 package com.utn.aerotaxi;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
-
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
 
 
 public class Flight implements Serializable {
-    private String id;
+
     private Airplane airplane;
+    private String id;
     private ECities departureCity;
     private ECities arrivalCity;
     private int distance;

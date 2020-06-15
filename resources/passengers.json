@@ -1,1 +1,25 @@
-[{"name":"Agus","lastName":"Iri","dni":"40138021","age":25,"totalSpend":0.0,"bestAirplane":null,"flights":[]},{"name":"Agus","lastName":"Lap","dni":"33984783","age":25,"totalSpend":0.0,"bestAirplane":null,"flights":[]},{"name":"Gonza","lastName":"rom","dni":"99789654","age":25,"totalSpend":0.0,"bestAirplane":null,"flights":[]}]
+[ "java.util.LinkedList", [ [ "com.utn.passenger.Passenger", {
+  "name" : "Agus",
+  "lastName" : "Iri",
+  "dni" : "40138021",
+  "age" : 25,
+  "totalSpend" : 0.0,
+  "bestAirplane" : null,
+  "flights" : [ "java.util.ArrayList", [ ] ]
+} ], [ "com.utn.passenger.Passenger", {
+  "name" : "Agus",
+  "lastName" : "Lap",
+  "dni" : "33984783",
+  "age" : 25,
+  "totalSpend" : 0.0,
+  "bestAirplane" : null,
+  "flights" : [ "java.util.ArrayList", [ ] ]
+} ], [ "com.utn.passenger.Passenger", {
+  "name" : "Gonza",
+  "lastName" : "rom",
+  "dni" : "99789654",
+  "age" : 25,
+  "totalSpend" : 0.0,
+  "bestAirplane" : null,
+  "flights" : [ "java.util.ArrayList", [ ] ]
+} ] ] ]

@@ -5,7 +5,11 @@ import com.utn.passenger.Passenger;
 import com.utn.tools.JsonTools;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Company {
 
@@ -16,9 +20,9 @@ public class Company {
 
     public Company(String name) {
         this.name = name;
-        this.clients = JsonTools.readPassengerJson(JsonTools.fpassengers,Passenger.class); //<!-- Tomamos las listas de JSONs
-        this.flights = JsonTools.readPassengerJson(JsonTools.fflights,Flight.class);//<!-- Tomamos las listas de JSONs
-        this.airplanes = JsonTools.readPassengerJson(JsonTools.fairplanes,Airplane.class);//<!-- Tomamos las listas de JSONs
+        this.clients = JsonTools.readJson(JsonTools.fpassengers,Passenger.class); //<!-- Tomamos las listas de JSONs
+        this.flights = JsonTools.readJson(JsonTools.fflights,Flight.class);//<!-- Tomamos las listas de JSONs
+        this.airplanes = JsonTools.readJson(JsonTools.fairplanes,Airplane.class);//<!-- Tomamos las listas de JSONs
     }
 
     ///Muestro aquellos aviones que corresponden a una fecha enviada por parametro
@@ -30,4 +34,19 @@ public class Company {
         }
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public LinkedList<Passenger> getClients() {
+        return new LinkedList<>(clients);
+    }
+
+    public LinkedList<Flight> getFlights() {
+        return new LinkedList<>(flights);
+    }
+
+    public LinkedList<Airplane> getAirplanes() {
+        return new LinkedList<>(airplanes);
+    }
 }
