@@ -33,5 +33,9 @@ public class Main {
         JsonTools.writeJson(flights, JsonTools.fflights);
 
         Company com1 = new Company("AeroTaxi");
+        Funcionality program = new Funcionality(com1);
+        program.startProgram();
+
+
     }
 }

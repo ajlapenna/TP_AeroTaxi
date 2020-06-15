@@ -20,18 +20,45 @@ public class Company {
 
     public Company(String name) {
         this.name = name;
-        this.clients = JsonTools.readJson(JsonTools.fpassengers,Passenger.class); //<!-- Tomamos las listas de JSONs
-        this.flights = JsonTools.readJson(JsonTools.fflights,Flight.class);//<!-- Tomamos las listas de JSONs
-        this.airplanes = JsonTools.readJson(JsonTools.fairplanes,Airplane.class);//<!-- Tomamos las listas de JSONs
+        this.clients = JsonTools.readJson(JsonTools.fpassengers, Passenger.class); //<!-- Tomamos las listas de JSONs
+        this.flights = JsonTools.readJson(JsonTools.fflights, Flight.class);//<!-- Tomamos las listas de JSONs
+        this.airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);//<!-- Tomamos las listas de JSONs
+    }
+
+    ///Comparo la fecha de este momento con la del vuelo -1 día,
+    ///ya que no se podran cancelar con menos de 24hs de antelacion
+    public boolean unsuscribeFlight(Passenger p, Flight flight) {
+        boolean deleted = false;
+        if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
+            flight.deletePassenger(p);
+            deleted = true;
+        } else {
+            System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
+        }
+        return deleted;
     }
 
     ///Muestro aquellos aviones que corresponden a una fecha enviada por parametro
     public void showFlightsForDate(LocalDate date) {
-        System.out.println("Flights to "+date);
+        System.out.println("Flights to " + date);
         for (Flight f : flights) {
-            if(f.getDeparting().isEqual(date) == true)
+            if (f.getDeparting().isEqual(date) == true)
                 System.out.println(f.toString());
         }
+    }
+
+    public boolean existClient(String dni){
+        boolean rta = false;
+        for (Passenger p : this.clients) {
+            if(p.getDni().compareToIgnoreCase(dni) == 0)
+                rta = true;
+        }
+        return rta;
+    }
+
+    public void addClient(Passenger newClient){
+        if(newClient instanceof Passenger)
+            clients.add(newClient);
     }
 
     public String getName() {
