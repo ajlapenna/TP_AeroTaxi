@@ -5,6 +5,7 @@ import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.*;
+
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
@@ -69,9 +70,10 @@ public class Flight implements Serializable {
     /**
      * Add a flight ticket if the amount of passengers from the ticket is less
      * than the maximum capacity of the airplane.
+     *
      * @param ticket = Current ticket
      * @return TRUE = flight ticket added.
-     *  FALSE = flight ticket doesn't added
+     * FALSE = flight ticket doesn't added
      */
     public boolean addFlightTicket(FlightTicket ticket) {
         if (ticket == null) {
@@ -83,6 +85,17 @@ public class Flight implements Serializable {
                 return true;
             } else return false;
         }
+    }
+
+    public boolean deletePassenger(Passenger toDelete) {
+        boolean result = false;
+        for (Passenger p : passengers) {
+            if (p.equals(toDelete) == true) {
+                passengers.remove(p);
+                result = true;
+            }
+        }
+        return result;
     }
 
     public LocalDate getDeparting() {

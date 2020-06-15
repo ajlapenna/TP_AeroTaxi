@@ -1,8 +1,8 @@
 [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.Flight", {
   "airplane" : [ "com.utn.airplanes.BronzeFleet", {
-    "id" : "ab1e66a96b",
+    "id" : "4622237dfa",
     "fuelCapacity" : 6000.0,
-    "costPerKM" : 299.29,
+    "costPerKM" : 299.75,
     "maxPassengerCapacity" : 30,
     "topSpeed" : 750.0,
     "countFlights" : 0,
