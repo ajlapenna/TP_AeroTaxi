@@ -13,7 +13,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        //Sandbox:::::::::
+        //Sandbox::::::::::
         List<Passenger> passengers = new LinkedList<>();
         passengers.add(new Passenger("Agus", "Iri", "40138021", 25));
         passengers.add(new Passenger("Agus", "Lap", "33984783", 25));
