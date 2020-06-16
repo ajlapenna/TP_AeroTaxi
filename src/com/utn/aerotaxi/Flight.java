@@ -90,8 +90,8 @@ public class Flight implements Serializable {
     public boolean deletePassenger(Passenger toDelete) {
         boolean result = false;
         for (Passenger p : passengers) {
-            if (p.equals(toDelete) == true) {
-                passengers.remove(p);
+            if (p.equals(toDelete)) {
+                p.setDeleted(true);
                 result = true;
             }
         }
@@ -100,6 +100,22 @@ public class Flight implements Serializable {
 
     public LocalDate getDeparting() {
         return this.departing;
+    }
+
+    public LinkedList<FlightTicket> getFlightTickets() {
+        return flightTickets;
+    }
+
+    public ECities getDepartureCity() {
+        return departureCity;
+    }
+
+    public ECities getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -112,6 +128,7 @@ public class Flight implements Serializable {
                 ", distance=" + distance +
                 ", departing=" + departing +
                 ", passengers=" + passengers +
+                toolbox.printTicketsFlight(flightTickets,this)+
                 '}';
     }
 }
