@@ -5,11 +5,9 @@ import com.utn.passenger.Passenger;
 import com.utn.tools.JsonTools;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.stream.Collectors;
+
 
 public class Company {
 
@@ -30,8 +28,7 @@ public class Company {
     public boolean unsuscribeFlight(Passenger p, Flight flight) {
         boolean deleted = false;
         if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
-            flight.deletePassenger(p);
-            deleted = true;
+            deleted=flight.deletePassenger(p);
         } else {
             System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
         }
@@ -75,5 +72,13 @@ public class Company {
 
     public LinkedList<Airplane> getAirplanes() {
         return new LinkedList<>(airplanes);
+    }
+
+    public void addPassenger(Passenger client)
+    {
+        if(client!=null){
+            clients.add(client);
+        JsonTools.writeJson(clients,JsonTools.fpassengers);
+        }
     }
 }

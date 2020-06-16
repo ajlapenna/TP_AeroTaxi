@@ -10,6 +10,7 @@ public class BronzeFleet extends Airplane{
                        double maxVelocity, EPropulsionType EPropulsionType) {
         super(fullCapacity, maxPassengerCapacity, maxVelocity, EPropulsionType);
         super.setFlightFare(flightFare());
+        increaseCountFlights();
     }
 
     @Override

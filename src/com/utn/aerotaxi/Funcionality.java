@@ -1,8 +1,11 @@
 package com.utn.aerotaxi;
 
 import com.utn.passenger.Passenger;
+import com.utn.tools.JsonTools;
 
 import java.util.InputMismatchException;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Funcionality {
@@ -24,6 +27,7 @@ public class Funcionality {
             else {
                 System.out.println("Usted no se encuentra en el sistema por favor: ");
                 company.addClient(createUser(dni));
+                rta = true;
             }
         } catch (InputMismatchException e) {
             System.out.println("El DNI ingresado es inválido");
@@ -51,8 +55,10 @@ public class Funcionality {
             //Limpiar scanner
             scan.nextLine();
         }
+        company.addPassenger(newPassenger);
         return newPassenger;
     }
+
     public void startProgram(){
 
         boolean log = false;

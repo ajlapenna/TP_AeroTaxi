@@ -29,8 +29,10 @@ public class Main {
         List<Flight> flights = new LinkedList<>();
         flights.add(new Flight(airplanes.get(2), ECities.MONTVIDE, ECities.BSAS, LocalDate.now()));
         FlightTicket ticket1 = new FlightTicket(passengers.get(0), LocalDate.now(),
-                ECities.MONTVIDE, ECities.BSAS, flights.get(0), 5);
+                ECities.MONTVIDE, ECities.BSAS, flights.get(0).getId(), 5);
+        flights.get(0).addFlightTicket(ticket1);
         JsonTools.writeJson(flights, JsonTools.fflights);
+        System.out.println(flights.get(0));
 
         Company com1 = new Company("AeroTaxi");
         Funcionality program = new Funcionality(com1);
