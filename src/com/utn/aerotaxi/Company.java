@@ -4,17 +4,18 @@ import com.utn.airplanes.Airplane;
 import com.utn.passenger.Passenger;
 import com.utn.tools.JsonTools;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
 
 public class Company {
-
     private String name;
     private List<Passenger> passengers;
     private List<Flight> flights;
     private List<Airplane> airplanes;
+    private File file;
 
     public Company(String name) {
         this.name = name;
@@ -39,7 +40,7 @@ public class Company {
     public void showFlightsForDate(LocalDate date) {
         System.out.println("Flights to " + date);
         for (Flight f : flights) {
-            if (f.getDeparting().isEqual(date) == true)
+            if (f.getDeparting().isEqual(date))
                 System.out.println(f.toString());
         }
     }
@@ -57,20 +58,26 @@ public class Company {
     }
 
     private void setPassengers() {
-        passengers = new LinkedList<>();
-        if (!JsonTools.fpassengers.isEmpty())
+        file = new File(JsonTools.fpassengers);
+        if (file.length() == 0)
+            passengers = new LinkedList<>();
+        else
             passengers = JsonTools.readJson(JsonTools.fpassengers, Passenger.class);
     }
 
     private void setFlights() {
-        flights = new LinkedList<>();
-        if (!JsonTools.fflights.isEmpty())
+        file = new File(JsonTools.fflights);
+        if (file.length() == 0)
+            flights = new LinkedList<>();
+        else
             flights = JsonTools.readJson(JsonTools.fflights, Flight.class);
     }
 
     private void setAirplanes() {
-        airplanes = new LinkedList<>();
-        if (!JsonTools.fairplanes.isEmpty())
+        file = new File(JsonTools.fairplanes);
+        if (file.length() == 0)
+            airplanes = new LinkedList<>();
+        else
             airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);
     }
 

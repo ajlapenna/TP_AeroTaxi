@@ -6,6 +6,7 @@ import com.utn.enums.*;
 import com.utn.passenger.*;
 import com.utn.tools.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -32,12 +33,10 @@ public class Main {
                 ECities.MONTVIDE, ECities.BSAS, flights.get(0).getId(), 5);
         flights.get(0).addFlightTicket(ticket1);
         JsonTools.writeJson(flights, JsonTools.fflights);
-        System.out.println(flights.get(0));
+        //System.out.println(flights.get(0));
 
         Company com1 = new Company("AeroTaxi");
         Funcionality program = new Funcionality(com1);
         program.startProgram();
-
-
     }
 }

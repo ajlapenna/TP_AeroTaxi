@@ -13,8 +13,8 @@ public class GoldFleet extends Airplane implements IExtraServices {
     }
 
     public GoldFleet(double fullCapacity,
-                     int maxPassengerCapacity, double maxVelocity, EPropulsionType EPropulsionType) {
-        super(fullCapacity, maxPassengerCapacity, maxVelocity, EPropulsionType);
+                     int maxPassengerCapacity, double maxVelocity, EPropulsionType ePropulsionType) {
+        super(fullCapacity, maxPassengerCapacity, maxVelocity, ePropulsionType);
         super.setFlightFare(flightFare());
         this.wifiOnBoard = wifiOnBoard();
     }

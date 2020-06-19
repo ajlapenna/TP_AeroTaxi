@@ -11,7 +11,7 @@ public abstract class Airplane implements Serializable {
     private double costPerKM= Toolbox.costRandom(); //Random 150 to 300
     private int maxPassengerCapacity;
     private double topSpeed;
-    private EPropulsionType EPropulsionType;
+    private EPropulsionType ePropulsionType;
     private int countFlights;
     private double flightFare; //(Tarifa del tipo de avión)
 
@@ -20,12 +20,12 @@ public abstract class Airplane implements Serializable {
     }
 
     public Airplane(double fuelCapacity, int maxPassengerCapacity,
-                    double topSpeed, EPropulsionType EPropulsionType) {
+                    double topSpeed, EPropulsionType ePropulsionType) {
         this.id = Toolbox.setId();
         this.fuelCapacity = fuelCapacity;
         this.maxPassengerCapacity = maxPassengerCapacity;
         this.topSpeed = topSpeed;
-        this.EPropulsionType = EPropulsionType;
+        this.ePropulsionType = ePropulsionType;
         this.countFlights = 0;
 
     }
@@ -49,9 +49,9 @@ public abstract class Airplane implements Serializable {
 
     public void setTopSpeed(double topSpeed) {this.topSpeed = topSpeed;}
 
-    public String getEPropulsionType() {return EPropulsionType.getEngineType();}
+    public String getePropulsionType() {return ePropulsionType.getEngineType();}
 
-    public void setEPropulsionType(EPropulsionType EPropulsionType) {this.EPropulsionType = EPropulsionType;}
+    public void setePropulsionType(EPropulsionType ePropulsionType) {this.ePropulsionType = ePropulsionType;}
 
     public int getCountFlights() {return countFlights;}
 
@@ -72,6 +72,6 @@ public abstract class Airplane implements Serializable {
                 ", costPerKM=" + costPerKM +
                 ", passengerCapacity=" + maxPassengerCapacity +
                 ", topSpeed=" + topSpeed +
-                ", propulsionType=" + EPropulsionType;
+                ", propulsionType=" + ePropulsionType;
     }
 }

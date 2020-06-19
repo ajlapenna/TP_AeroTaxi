@@ -7,8 +7,8 @@ public class BronzeFleet extends Airplane{
     public BronzeFleet(){}
 
     public BronzeFleet(double fullCapacity,int maxPassengerCapacity,
-                       double maxVelocity, EPropulsionType EPropulsionType) {
-        super(fullCapacity, maxPassengerCapacity, maxVelocity, EPropulsionType);
+                       double maxVelocity, EPropulsionType ePropulsionType) {
+        super(fullCapacity, maxPassengerCapacity, maxVelocity, ePropulsionType);
         super.setFlightFare(flightFare());
         increaseCountFlights();
     }
