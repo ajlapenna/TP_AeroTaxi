@@ -8,7 +8,7 @@ import java.io.Serializable;
 public abstract class Airplane implements Serializable {
     private String id;
     private double fuelCapacity;
-    private double costPerKM=toolbox.costRandom(); //Random 150 to 300
+    private double costPerKM= Toolbox.costRandom(); //Random 150 to 300
     private int maxPassengerCapacity;
     private double topSpeed;
     private EPropulsionType EPropulsionType;
@@ -21,7 +21,7 @@ public abstract class Airplane implements Serializable {
 
     public Airplane(double fuelCapacity, int maxPassengerCapacity,
                     double topSpeed, EPropulsionType EPropulsionType) {
-        this.id = toolbox.setId();
+        this.id = Toolbox.setId();
         this.fuelCapacity = fuelCapacity;
         this.maxPassengerCapacity = maxPassengerCapacity;
         this.topSpeed = topSpeed;

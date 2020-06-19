@@ -12,15 +12,15 @@ import java.util.List;
 public class Company {
 
     private String name;
-    private List<Passenger> clients;
+    private List<Passenger> passengers;
     private List<Flight> flights;
     private List<Airplane> airplanes;
 
     public Company(String name) {
         this.name = name;
-        this.clients = JsonTools.readJson(JsonTools.fpassengers, Passenger.class); //<!-- Tomamos las listas de JSONs
-        this.flights = JsonTools.readJson(JsonTools.fflights, Flight.class);//<!-- Tomamos las listas de JSONs
-        this.airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);//<!-- Tomamos las listas de JSONs
+        setPassengers();
+        setFlights();
+        setAirplanes();
     }
 
     ///Comparo la fecha de este momento con la del vuelo -1 día,
@@ -44,26 +44,38 @@ public class Company {
         }
     }
 
-    public boolean existClient(String dni){
-        boolean rta = false;
-        for (Passenger p : this.clients) {
+    public boolean existPassenger(String dni){
+        for (Passenger p : passengers) {
             if(p.getDni().compareToIgnoreCase(dni) == 0)
-                rta = true;
+                return true;
         }
-        return rta;
-    }
-
-    public void addClient(Passenger newClient){
-        if(newClient instanceof Passenger)
-            clients.add(newClient);
+        return false;
     }
 
     public String getName() {
         return name;
     }
 
-    public LinkedList<Passenger> getClients() {
-        return new LinkedList<>(clients);
+    private void setPassengers() {
+        passengers = new LinkedList<>();
+        if (!JsonTools.fpassengers.isEmpty())
+            passengers = JsonTools.readJson(JsonTools.fpassengers, Passenger.class);
+    }
+
+    private void setFlights() {
+        flights = new LinkedList<>();
+        if (!JsonTools.fflights.isEmpty())
+            flights = JsonTools.readJson(JsonTools.fflights, Flight.class);
+    }
+
+    private void setAirplanes() {
+        airplanes = new LinkedList<>();
+        if (!JsonTools.fairplanes.isEmpty())
+            airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);
+    }
+
+    public LinkedList<Passenger> getPassengers() {
+        return new LinkedList<>(passengers);
     }
 
     public LinkedList<Flight> getFlights() {
@@ -74,11 +86,10 @@ public class Company {
         return new LinkedList<>(airplanes);
     }
 
-    public void addPassenger(Passenger client)
-    {
-        if(client!=null){
-            clients.add(client);
-        JsonTools.writeJson(clients,JsonTools.fpassengers);
+    public void addPassenger(Passenger passenger) {
+        if(passenger != null){
+            passengers.add(passenger);
+            JsonTools.writeJson(passengers,JsonTools.fpassengers);
         }
     }
 }

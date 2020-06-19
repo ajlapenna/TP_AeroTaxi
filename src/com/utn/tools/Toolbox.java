@@ -9,8 +9,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
 
-public class toolbox implements Serializable {
-    toolbox() {
+public class Toolbox implements Serializable {
+    Toolbox() {
     }
 
     /**

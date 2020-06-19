@@ -1,6 +1,5 @@
 package com.utn.aerotaxi;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
@@ -30,7 +29,7 @@ public class Flight implements Serializable {
     public Flight(Airplane airplane, ECities departureCity,
                   ECities arrivalCity, LocalDate departing) {
         if (airplane != null) {
-            this.id = toolbox.setId();
+            this.id = Toolbox.setId();
             this.airplane = airplane;
             this.departureCity = departureCity;
             this.arrivalCity = arrivalCity;
@@ -128,7 +127,7 @@ public class Flight implements Serializable {
                 ", distance=" + distance +
                 ", departing=" + departing +
                 ", passengers=" + passengers +
-                toolbox.printTicketsFlight(flightTickets,this)+
+                Toolbox.printTicketsFlight(flightTickets,this)+
                 '}';
     }
 }
