@@ -7,7 +7,7 @@
     "topSpeed" : 750.0,
     "countFlights" : 1,
     "flightFare" : 3000.0,
-    "epropulsionType" : "Propeller Engine"
+    "ePropulsionType" : "Propeller Engine"
   } ],
   "id" : "45a5b2f4bf",
   "departureCity" : "Montevideo",

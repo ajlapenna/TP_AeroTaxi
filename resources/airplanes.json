@@ -7,7 +7,7 @@
   "countFlights" : 0,
   "flightFare" : 6000.0,
   "wifiOnBoard" : true,
-  "epropulsionType" : "Reaction Engine"
+  "ePropulsionType" : "Reaction Engine"
 } ], [ "com.utn.airplanes.SilverFleet", {
   "id" : "ccba01516e",
   "fuelCapacity" : 4000.0,
@@ -16,7 +16,7 @@
   "topSpeed" : 999.0,
   "countFlights" : 0,
   "flightFare" : 4000.0,
-  "epropulsionType" : "Piston Engine"
+  "ePropulsionType" : "Piston Engine"
 } ], [ "com.utn.airplanes.BronzeFleet", {
   "id" : "5b50f78457",
   "fuelCapacity" : 6000.0,
@@ -25,5 +25,5 @@
   "topSpeed" : 750.0,
   "countFlights" : 1,
   "flightFare" : 3000.0,
-  "epropulsionType" : "Propeller Engine"
+  "ePropulsionType" : "Propeller Engine"
 } ] ] ]
