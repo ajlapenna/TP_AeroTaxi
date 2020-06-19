@@ -53,7 +53,6 @@ public class Funcionality {
             //Limpiar scanner
             scan.nextLine();
         }
-        company.addPassenger(newPassenger);
         return newPassenger;
     }
 
