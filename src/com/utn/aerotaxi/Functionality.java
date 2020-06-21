@@ -1,24 +1,23 @@
 package com.utn.aerotaxi;
 
 import com.utn.passenger.Passenger;
-
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class Funcionality {
+public class Functionality {
 
     private Company company;
     Scanner scan = new Scanner(System.in);
 
-    public Funcionality(Company company) {
+    public Functionality(Company company) {
         this.company = company;
     }
 
     private boolean validationUser() {
         try {
             System.out.print("Ingrese su DNI: ");
-            String dni = scan.nextLine();
-            if (company.existPassenger(dni) == true)
+            String dni = String.valueOf(scan.nextInt());
+            if (company.existPassenger(dni))
                 return true;
             else {
                 System.out.println("Usted no se encuentra en el sistema. Por favor: ");
@@ -26,7 +25,8 @@ public class Funcionality {
                 return true;
             }
         } catch (InputMismatchException e) {
-            System.out.println("El DNI ingresado es inválido");
+            System.out.println("El DNI ingresado es inválido.");
+            scan.nextLine();
         }
         return false;
     }
@@ -73,6 +73,11 @@ public class Funcionality {
             switch (menu) {
                 case 1:
                     //hacer formulario
+                    System.out.println("Aqui habia ponido yo mi case 1");
+                    break;
+
+                case 2:
+                    System.out.println("Aqui habia ponido yo mi case 2");
                     break;
 
             }

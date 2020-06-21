@@ -1,19 +1,19 @@
 [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.Flight", {
   "airplane" : [ "com.utn.airplanes.BronzeFleet", {
-    "id" : "5b50f78457",
+    "id" : "4eeff8b0fc",
     "fuelCapacity" : 6000.0,
-    "costPerKM" : 299.25,
+    "costPerKM" : 299.32,
     "maxPassengerCapacity" : 30,
     "topSpeed" : 750.0,
+    "ePropulsionType" : "Propeller Engine",
     "countFlights" : 1,
-    "flightFare" : 3000.0,
-    "ePropulsionType" : "Propeller Engine"
+    "flightFare" : 3000.0
   } ],
-  "id" : "45a5b2f4bf",
+  "id" : "d436fdb96a",
   "departureCity" : "Montevideo",
   "arrivalCity" : "Buenos Aires",
   "distance" : 950,
-  "departing" : [ 2020, 6, 19 ],
+  "departing" : [ 2020, 6, 20 ],
   "passengers" : [ "java.util.LinkedList", [ [ "com.utn.passenger.Passenger", {
     "name" : "Agus",
     "lastName" : "Iri",
