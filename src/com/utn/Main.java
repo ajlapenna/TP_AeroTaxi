@@ -14,7 +14,7 @@ public class Main {
 
     public static void main(String[] args) {
         //Sandbox::::::::::
-        List<Passenger> passengers = new LinkedList<>();
+        /*List<Passenger> passengers = new LinkedList<>();
         passengers.add(new Passenger("Agus", "Iri", "40138021", 25));
         passengers.add(new Passenger("Agus", "Lap", "33984783", 25));
         passengers.add(new Passenger("Gonza", "rom", "99789654", 25));
@@ -31,7 +31,7 @@ public class Main {
         FlightTicket ticket1 = new FlightTicket(passengers.get(0), LocalDate.now(),
                 ECities.MONTVIDE, ECities.BSAS, flights.get(0).getId(), 5);
         flights.get(0).addFlightTicket(ticket1);
-        JsonTools.writeJson(flights, JsonTools.fflights);
+        JsonTools.writeJson(flights, JsonTools.fflights);*/
         //System.out.println(flights.get(0));
 
         Company com1 = new Company("AeroTaxi");
