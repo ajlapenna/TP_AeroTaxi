@@ -6,6 +6,7 @@ import com.utn.enums.*;
 import com.utn.passenger.*;
 import com.utn.tools.*;
 
+import java.io.File;
 import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,7 +14,7 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        //Sandbox:::::::::
+        //Sandbox::::::::::
         List<Passenger> passengers = new LinkedList<>();
         passengers.add(new Passenger("Agus", "Iri", "40138021", 25));
         passengers.add(new Passenger("Agus", "Lap", "33984783", 25));
@@ -28,14 +29,17 @@ public class Main {
 
         List<Flight> flights = new LinkedList<>();
         flights.add(new Flight(airplanes.get(2), ECities.MONTVIDE, ECities.BSAS, LocalDate.now()));
-        FlightTicket ticket1 = new FlightTicket(passengers.get(0), LocalDate.now(),
-                ECities.MONTVIDE, ECities.BSAS, flights.get(0), 5);
+
+        FlightTicket ticket1 = new FlightTicket(passengers.get(0), LocalDate.now(), ECities.MONTVIDE, ECities.BSAS, flights.get(0).getId(), 5);
+        flights.get(0).addFlightTicket(ticket1);
         JsonTools.writeJson(flights, JsonTools.fflights);
+        //System.out.println(flights.get(0));
 
         Company com1 = new Company("AeroTaxi");
-        Funcionality program = new Funcionality(com1);
-        program.startProgram();
-
+        Functionality program = new Functionality(com1);
+       // program.startProgram();
+        program.buyFlight();
+        //
 
     }
 }

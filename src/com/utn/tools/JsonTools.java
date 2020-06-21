@@ -9,10 +9,13 @@ import com.fasterxml.jackson.databind.jsontype.PolymorphicTypeValidator;
 import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.utn.aerotaxi.Flight;
+import com.utn.aerotaxi.FlightTicket;
+import com.utn.aerotaxi.Functionality;
 import com.utn.airplanes.Airplane;
 import com.utn.passenger.Passenger;
 import java.io.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -81,7 +84,6 @@ public class JsonTools {
                 list = getMapper().readValue(buffer, listType);
             } catch (IOException ex) {
                 System.out.println("E R R O R : " + ex.getMessage());
-//                ex.printStackTrace();
             }
         }
         return list;
@@ -96,6 +98,7 @@ public class JsonTools {
      */
     private static final PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
             .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Passenger.class)
+            .allowIfBaseType(FlightTicket.class).allowIfBaseType(Functionality.class).allowIfBaseType(ArrayList.class)
             .allowIfBaseType(LinkedList.class).allowIfBaseType(List.class).allowIfBaseType(LocalDate.class).build();
 
     /**

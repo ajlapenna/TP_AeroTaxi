@@ -1,6 +1,5 @@
 package com.utn.aerotaxi;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
@@ -30,7 +29,7 @@ public class Flight implements Serializable {
     public Flight(Airplane airplane, ECities departureCity,
                   ECities arrivalCity, LocalDate departing) {
         if (airplane != null) {
-            this.id = toolbox.setId();
+            this.id = Toolbox.setId();
             this.airplane = airplane;
             this.departureCity = departureCity;
             this.arrivalCity = arrivalCity;
@@ -39,6 +38,7 @@ public class Flight implements Serializable {
             this.isGone = false;
         }
     }
+
 
     private int setDistance() {
         return ((departureCity == ECities.BSAS && arrivalCity == ECities.CBA) ||
@@ -86,20 +86,41 @@ public class Flight implements Serializable {
             } else return false;
         }
     }
+    public void addPassenger(Passenger toAdd){
+        this.passengers.add(toAdd);
+    }
 
     public boolean deletePassenger(Passenger toDelete) {
         boolean result = false;
         for (Passenger p : passengers) {
-            if (p.equals(toDelete) == true) {
-                passengers.remove(p);
+            if (p.equals(toDelete)) {
+                p.setDeleted(true);
                 result = true;
             }
         }
         return result;
     }
 
+
+
     public LocalDate getDeparting() {
         return this.departing;
+    }
+
+    public LinkedList<FlightTicket> getFlightTickets() {
+        return flightTickets;
+    }
+
+    public ECities getDepartureCity() {
+        return departureCity;
+    }
+
+    public ECities getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public String getId() {
+        return id;
     }
 
     @Override
@@ -112,6 +133,7 @@ public class Flight implements Serializable {
                 ", distance=" + distance +
                 ", departing=" + departing +
                 ", passengers=" + passengers +
+                Toolbox.printTicketsFlight(flightTickets,this)+
                 '}';
     }
 }

@@ -9,9 +9,11 @@ public class Person implements Serializable {
     private String lastName;
     private String dni;
     private int age;
+    private boolean deleted;
 
     //Constructor//
     public Person() {
+        this.deleted=false;
     }
 
     public Person(String name, String lastName, String dni, int age) {
@@ -19,6 +21,7 @@ public class Person implements Serializable {
         this.lastName = lastName;
         this.dni = dni;
         this.age = age;
+        this.deleted=false;
     }
 
     //login?
@@ -43,8 +46,17 @@ public class Person implements Serializable {
 
     public void setAge(int age) {this.age = age;}
 
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+
     @Override
     public String toString() {
         return name + ", last name='" + lastName + '\'' +", dni='" + dni + '\'' +", age=" + age ;
     }
+
 }
