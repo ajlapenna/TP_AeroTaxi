@@ -8,10 +8,9 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.utn.aerotaxi.Flight;
 import com.utn.aerotaxi.FlightTicket;
-import com.utn.person.Admin;
+import com.utn.person.*;
 import com.utn.program.Functionality;
 import com.utn.airplanes.Airplane;
-import com.utn.person.Passenger;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,7 +84,7 @@ public class JsonTools {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                file.exists();
+                //file.exists();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -118,7 +117,7 @@ public class JsonTools {
      * * this article</a> for full explanation).
      */
     private static final PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
-            .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Passenger.class).allowIfBaseType(Admin.class)
+            .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Person.class).allowIfBaseType(Admin.class)
             .allowIfBaseType(FlightTicket.class).allowIfBaseType(Functionality.class).allowIfBaseType(ArrayList.class)
             .allowIfBaseType(LinkedList.class).allowIfBaseType(List.class).allowIfBaseType(LocalDate.class).build();
 
