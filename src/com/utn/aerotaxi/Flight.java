@@ -116,6 +116,10 @@ public class Flight implements Serializable {
         return id;
     }
 
+    public void addPassenger(Passenger toAdd){
+        this.passengers.add(toAdd);
+    }
+
     @Override
     public String toString() {
         return "Flight{" +

@@ -1,9 +1,11 @@
 package com.utn.airplanes;
 
+import com.utn.enums.ECities;
 import com.utn.enums.EPropulsionType;
 import com.utn.tools.Toolbox;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public abstract class Airplane implements Serializable {
     private String id;
@@ -14,6 +16,8 @@ public abstract class Airplane implements Serializable {
     private EPropulsionType ePropulsionType;
     private int countFlights;
     private int flightFare; //(Tarifa del tipo de avión)
+    private LocalDate nextDepartingDate;
+    private ECities nextCity;
 
     public Airplane() {
     }
@@ -28,7 +32,25 @@ public abstract class Airplane implements Serializable {
         this.countFlights = 0;
     }
 
-    public String getId() {return this.id;}
+    public void setNextCity(ECities nextCity) {
+        this.nextCity = nextCity;
+    }
+
+    public void setNextDepartingDate(LocalDate nextDeparting) {
+        this.nextDepartingDate = nextDeparting;
+    }
+
+    public ECities getNextCity() {
+        return nextCity;
+    }
+
+    public LocalDate getNextDepartingDate() {
+        return nextDepartingDate;
+    }
+
+    public String getId() {
+        return this.id;
+    }
 
     public double getFuelCapacity() {return fuelCapacity;}
 

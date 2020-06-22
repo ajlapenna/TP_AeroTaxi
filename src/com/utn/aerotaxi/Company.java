@@ -1,12 +1,14 @@
 package com.utn.aerotaxi;
 
 import com.utn.airplanes.Airplane;
+import com.utn.enums.ECities;
 import com.utn.person.Admin;
 import com.utn.person.Passenger;
 import com.utn.person.Person;
 import com.utn.tools.JsonTools;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -105,5 +107,61 @@ public class Company {
 
     public String getName() {
         return name;
+    }
+
+    public Flight searchFlightForAirplaneAndDate(Airplane a, LocalDate departingDate) {
+        Flight flightToSearch = null;
+        for (Flight f : flights) {
+            if (f.getAirplane().equals(a) == true && departingDate.isEqual(f.getDeparting()) == true) {
+                flightToSearch = f;
+            }
+        }
+        return flightToSearch;
+    }
+
+    public void showAvaibleFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+
+        for (Airplane a : airplanes) {
+            //Si su proximo vuelo se realiza otro día, lo muestro
+            if (!a.getNextDepartingDate().isEqual(departingDate)) {
+                System.out.println(a.toString());
+                // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+            } else if (a.getNextCity() == departureCity) {
+                //Si es distanta no la buscamos, ya que cada avion solo puede hacer un destino por dia
+                //Si es igual,buscamos el flight registrado en la lista y comprobamos que su capacidad sea suficiente
+                if (searchFlightForAirplaneAndDate(a, departingDate).getPassengers().size() <= countOfPassengers) {
+                    System.out.println(a);
+                }
+            }
+        }
+    }
+
+    public boolean existAirplane(String id) {
+        boolean rta = false;
+        for (Airplane a : airplanes) {
+            if (id.compareToIgnoreCase(a.getId()) == 0)
+                rta = true;
+        }
+        return rta;
+    }
+
+    public double calculateTicketCostForAirplanId(String id, int countOfPassengers, int flightDistance) {
+        double ticketCost = 0;
+        for (Airplane toSearch : airplanes) {
+            if (toSearch.getId().compareToIgnoreCase(id) == 0) {
+                ticketCost = (toSearch.getCostPerKM() * flightDistance) +
+                        (countOfPassengers * 3500) + toSearch.getFlightFare();
+            }
+        }
+        return ticketCost;
+    }
+
+    public Airplane searchAirplaneForId(String id) {
+        Airplane toSearch = null;
+        for (Airplane a : airplanes) {
+            if (id.compareToIgnoreCase(a.getId()) == 0)
+                toSearch = a;
+        }
+        return toSearch;
     }
 }
