@@ -1,33 +1,23 @@
-package com.utn.passenger;
+package com.utn.person;
 
 import java.io.Serializable;
 
-public class Person implements Serializable {
-    private String username; //login?
-    private String password;  //login?
+public abstract class Person implements Serializable {
+    private String password;    //login?
     private String name;
     private String lastName;
-    private String dni;
+    private String dni;         // funciona como userName para el login
     private int age;
     private boolean deleted;
 
-    //Constructor//
-    public Person() {
-        this.deleted=false;
-    }
-
-    public Person(String name, String lastName, String dni, int age) {
+    public Person() {}
+    public Person(String name, String lastName, String dni, int age, String password) {
         this.name = name;
         this.lastName = lastName;
         this.dni = dni;
         this.age = age;
-        this.deleted=false;
-    }
-
-    //login?
-    public Person(String username, String password) {
-        this.username = username;
         this.password = password;
+        this.deleted = false;
     }
 
     public String getName() {return name;}
@@ -46,6 +36,14 @@ public class Person implements Serializable {
 
     public void setAge(int age) {this.age = age;}
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public boolean isDeleted() {
         return deleted;
     }
@@ -58,5 +56,4 @@ public class Person implements Serializable {
     public String toString() {
         return name + ", last name='" + lastName + '\'' +", dni='" + dni + '\'' +", age=" + age ;
     }
-
 }

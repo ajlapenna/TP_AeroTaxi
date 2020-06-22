@@ -1,7 +1,5 @@
 package com.utn.tools;
 
-
-
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.jsontype.BasicPolymorphicTypeValidator;
@@ -10,9 +8,10 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.utn.aerotaxi.Flight;
 import com.utn.aerotaxi.FlightTicket;
-import com.utn.aerotaxi.Functionality;
+import com.utn.person.Admin;
+import com.utn.program.Functionality;
 import com.utn.airplanes.Airplane;
-import com.utn.passenger.Passenger;
+import com.utn.person.Passenger;
 import java.io.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -26,6 +25,7 @@ import java.util.List;
  */
 public class JsonTools {
     public static final String fpassengers = "resources/passengers.json";
+    public static final String fadmins = "resources/admins.json";
     public static final String fairplanes = "resources/airplanes.json";
     public static final String fflights = "resources/flights.json";
 
@@ -41,15 +41,26 @@ public class JsonTools {
      * @param list {@link List} The source list
      * @param path {@link String}Path of the file
      */
+
     public static <t> void writeJson(List<t> list, String path) {
         if (list == null) System.out.println("E R R O R list cant be null");
         else {
             BufferedWriter buffer = null;
-            try {
-                buffer = new BufferedWriter(new FileWriter(new File(path)));
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+            File file = new File(path);
+            if (!file.exists()) {
+                try {
+                    file.createNewFile();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+                try {
+                    buffer = new BufferedWriter(new FileWriter(file));
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());
+                }
             }
+
             if (buffer != null) {
                 try {
                     getMapper().writerWithDefaultPrettyPrinter().writeValue(buffer, list);
@@ -70,10 +81,20 @@ public class JsonTools {
      */
     public static <T> List<T> readJson(String path, Class<T> tClass) {
         BufferedReader buffer = null;
-        try {
-            buffer = new BufferedReader(new FileReader(new File(path)));
-        } catch (IOException ex) {
-            System.out.println("E R R O R : " + ex.getMessage());
+        File file = new File(path);
+        if (!file.exists()) {
+            try {
+                file.createNewFile();
+                file.exists();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                buffer = new BufferedReader(new FileReader(file));
+            } catch (IOException ex) {
+                System.out.println("E R R O R : " + ex.getMessage());
+            }
         }
 
         List<T> list = null;
@@ -97,7 +118,7 @@ public class JsonTools {
      * * this article</a> for full explanation).
      */
     private static final PolymorphicTypeValidator ptv = BasicPolymorphicTypeValidator.builder()
-            .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Passenger.class)
+            .allowIfBaseType(Airplane.class).allowIfBaseType(Flight.class).allowIfBaseType(Passenger.class).allowIfBaseType(Admin.class)
             .allowIfBaseType(FlightTicket.class).allowIfBaseType(Functionality.class).allowIfBaseType(ArrayList.class)
             .allowIfBaseType(LinkedList.class).allowIfBaseType(List.class).allowIfBaseType(LocalDate.class).build();
 

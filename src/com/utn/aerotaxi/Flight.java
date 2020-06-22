@@ -2,13 +2,12 @@ package com.utn.aerotaxi;
 
 import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
-import com.utn.passenger.Passenger;
-import com.utn.tools.*;
+import com.utn.person.Passenger;
+import com.utn.tools.Toolbox;
 
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.LinkedList;
-
 
 public class Flight implements Serializable {
 

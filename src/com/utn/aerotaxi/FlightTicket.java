@@ -1,12 +1,10 @@
 package com.utn.aerotaxi;
 
-import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
-import com.utn.passenger.Passenger;
+import com.utn.person.Passenger;
 
 import java.io.Serializable;
 import java.time.LocalDate;
-
 
 public class FlightTicket implements Serializable {
     private String flightID;

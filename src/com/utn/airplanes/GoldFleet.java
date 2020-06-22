@@ -1,40 +1,27 @@
 package com.utn.airplanes;
 
-import com.utn.enums.*;
+import com.utn.enums.EPropulsionType;
+
 import java.util.Random;
 
-
 public class GoldFleet extends Airplane implements IExtraServices {
-
     private boolean wifiOnBoard;
 
-
-    public GoldFleet() {
+    public GoldFleet(double fuelCapacity, int maxPassengerCapacity, double topSpeed,
+                     EPropulsionType ePropulsionType) {
+        super(fuelCapacity, maxPassengerCapacity, topSpeed, ePropulsionType);
+        super.setFlightFare(6000);
+        this.wifiOnBoard = new Random().nextBoolean();
     }
-
-    public GoldFleet(double fullCapacity,
-                     int maxPassengerCapacity, double maxVelocity, EPropulsionType ePropulsionType) {
-        super(fullCapacity, maxPassengerCapacity, maxVelocity, ePropulsionType);
-        super.setFlightFare(flightFare());
-        this.wifiOnBoard = wifiOnBoard();
-    }
-
-    @Override
-    public double flightFare() {
-        return 6000;
-    }
-
 
     @Override
     public String cateringService() {
         return "Catering service onBoard";
     }
 
-    private boolean wifiOnBoard() {
-        return new Random().nextBoolean();
+    public boolean isWifiOnBoard() {
+        return wifiOnBoard;
     }
-
-    public boolean isWifiOnBoard(){return wifiOnBoard;}
 
 
     @Override

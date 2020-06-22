@@ -1,23 +1,19 @@
 package com.utn.airplanes;
 
 import com.utn.enums.EPropulsionType;
-import com.utn.tools.*;
-import java.io.Serializable;
+import com.utn.tools.Toolbox;
 
+import java.io.Serializable;
 
 public abstract class Airplane implements Serializable {
     private String id;
     private double fuelCapacity;
-    private double costPerKM= Toolbox.costRandom(); //Random 150 to 300
+    private double costPerKM = Toolbox.costRandom(); //Random 150 to 300
     private int maxPassengerCapacity;
     private double topSpeed;
     private EPropulsionType ePropulsionType;
     private int countFlights;
-    private double flightFare; //(Tarifa del tipo de avión)
-
-    //Constructor//
-    public Airplane() {
-    }
+    private int flightFare; //(Tarifa del tipo de avión)
 
     public Airplane(double fuelCapacity, int maxPassengerCapacity,
                     double topSpeed, EPropulsionType ePropulsionType) {
@@ -27,9 +23,7 @@ public abstract class Airplane implements Serializable {
         this.topSpeed = topSpeed;
         this.ePropulsionType = ePropulsionType;
         this.countFlights = 0;
-
     }
-
 
     public String getId() {return this.id;}
 
@@ -60,10 +54,7 @@ public abstract class Airplane implements Serializable {
 
     public double getFlightFare(){return this.flightFare;}
 
-    public void setFlightFare(Double flightFare){this.flightFare=flightFare;}
-
-    public abstract double flightFare();
-
+    public void setFlightFare(int flightFare){this.flightFare=flightFare;}
 
     @Override
     public String toString() {
@@ -74,4 +65,6 @@ public abstract class Airplane implements Serializable {
                 ", topSpeed=" + topSpeed +
                 ", propulsionType=" + ePropulsionType;
     }
+
+
 }

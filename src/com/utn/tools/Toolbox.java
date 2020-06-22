@@ -2,7 +2,7 @@ package com.utn.tools;
 
 import com.utn.aerotaxi.Flight;
 import com.utn.aerotaxi.FlightTicket;
-import com.utn.passenger.Passenger;
+import com.utn.person.Passenger;
 
 import java.io.Serializable;
 import java.util.LinkedList;
@@ -10,8 +10,7 @@ import java.util.List;
 import java.util.UUID;
 
 public class Toolbox implements Serializable {
-    Toolbox() {
-    }
+    Toolbox() {}
 
     /**
      * Get a random UUID , transform it to String,
@@ -29,7 +28,7 @@ public class Toolbox implements Serializable {
      *
      * @return {@link Double} = value from 150 to 300 with only 2 decimals
      */
-    public static Double costRandom() {
+    public static double costRandom() {
         return Math.round(Math.random() * (150 - 300 + 1) + 300 * 100d) / 100d;
     }
 

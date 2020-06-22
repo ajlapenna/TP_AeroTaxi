@@ -1,0 +1,7 @@
+[ "java.util.LinkedList", [ [ "com.utn.person.Admin", {
+  "password" : "1234",
+  "name" : "Agus",
+  "lastName" : "Lapee",
+  "dni" : "38283270",
+  "age" : 26
+} ] ] ]

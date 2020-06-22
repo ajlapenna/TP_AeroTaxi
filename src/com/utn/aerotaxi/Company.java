@@ -1,18 +1,19 @@
 package com.utn.aerotaxi;
 
 import com.utn.airplanes.Airplane;
-import com.utn.passenger.Passenger;
+import com.utn.person.Admin;
+import com.utn.person.Passenger;
+import com.utn.person.Person;
 import com.utn.tools.JsonTools;
 
 import java.io.File;
-import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
-
 
 public class Company {
     private String name;
     private List<Passenger> passengers;
+    private List<Admin> admins;
     private List<Flight> flights;
     private List<Airplane> airplanes;
     private File file;
@@ -20,32 +21,13 @@ public class Company {
     public Company(String name) {
         this.name = name;
         setPassengers();
+        setAdmins();
         setFlights();
         setAirplanes();
+        file = null;
     }
 
-    ///Comparo la fecha de este momento con la del vuelo -1 día,
-    ///ya que no se podran cancelar con menos de 24hs de antelacion
-    public boolean unsuscribeFlight(Passenger p, Flight flight) {
-        boolean deleted = false;
-        if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
-            deleted=flight.deletePassenger(p);
-        } else {
-            System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
-        }
-        return deleted;
-    }
-
-    ///Muestro aquellos aviones que corresponden a una fecha enviada por parametro
-    public void showFlightsForDate(LocalDate date) {
-        System.out.println("Flights to " + date);
-        for (Flight f : flights) {
-            if (f.getDeparting().isEqual(date))
-                System.out.println(f.toString());
-        }
-    }
-
-    public boolean existPassenger(String dni){
+    public boolean existsPassenger(String dni){
         for (Passenger p : passengers) {
             if(p.getDni().compareToIgnoreCase(dni) == 0)
                 return true;
@@ -53,8 +35,12 @@ public class Company {
         return false;
     }
 
-    public String getName() {
-        return name;
+    public boolean existsAirplane(String id) {
+        for (Airplane a : airplanes) {
+            if (id.compareToIgnoreCase(a.getId()) == 0)
+                return true;
+        }
+        return false;
     }
 
     private void setPassengers() {
@@ -63,6 +49,14 @@ public class Company {
             passengers = new LinkedList<>();
         else
             passengers = JsonTools.readJson(JsonTools.fpassengers, Passenger.class);
+    }
+
+    private void setAdmins() {
+        file = new File(JsonTools.fadmins);
+        if (file.length() == 0)
+            admins = new LinkedList<>();
+        else
+            admins = JsonTools.readJson(JsonTools.fadmins, Admin.class);
     }
 
     private void setFlights() {
@@ -93,10 +87,23 @@ public class Company {
         return new LinkedList<>(airplanes);
     }
 
-    public void addPassenger(Passenger passenger) {
-        if(passenger != null){
-            passengers.add(passenger);
-            JsonTools.writeJson(passengers,JsonTools.fpassengers);
+    public void addUser(Person user) {
+        if(user != null){
+            if (user instanceof Passenger) {
+                passengers.add((Passenger) user);
+                JsonTools.writeJson(passengers, JsonTools.fpassengers);
+            } else if (user instanceof Admin) {
+                admins.add((Admin) user);
+                JsonTools.writeJson(admins, JsonTools.fadmins);
+            }
         }
+    }
+
+    public LinkedList<Admin> getAdmins() {
+        return new LinkedList<>(admins);
+    }
+
+    public String getName() {
+        return name;
     }
 }

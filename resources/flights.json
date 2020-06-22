@@ -1,15 +1,15 @@
 [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.Flight", {
   "airplane" : [ "com.utn.airplanes.BronzeFleet", {
-    "id" : "af68e4d44b",
+    "id" : "ed8a703011",
     "fuelCapacity" : 6000.0,
-    "costPerKM" : 298.97,
+    "costPerKM" : 299.51,
     "maxPassengerCapacity" : 30,
     "topSpeed" : 750.0,
     "ePropulsionType" : "Propeller Engine",
     "countFlights" : 1,
     "flightFare" : 3000.0
   } ],
-  "id" : "a1ef0ae333",
+  "id" : "ba906dafdb",
   "departureCity" : "Montevideo",
   "arrivalCity" : "Buenos Aires",
   "distance" : 950,

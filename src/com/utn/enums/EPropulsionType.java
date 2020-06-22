@@ -11,7 +11,7 @@ public enum EPropulsionType implements Serializable {
 
     private String engineType;
 
-    private EPropulsionType(String engineType){this.engineType=engineType;}
+    private EPropulsionType(String engineType) {this.engineType=engineType;}
 
     @JsonValue
     public String getEngineType(){return this.engineType;}
