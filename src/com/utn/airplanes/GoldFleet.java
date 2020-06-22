@@ -7,6 +7,9 @@ import java.util.Random;
 public class GoldFleet extends Airplane implements IExtraServices {
     private boolean wifiOnBoard;
 
+    public GoldFleet() {
+    }
+
     public GoldFleet(double fuelCapacity, int maxPassengerCapacity, double topSpeed,
                      EPropulsionType ePropulsionType) {
         super(fuelCapacity, maxPassengerCapacity, topSpeed, ePropulsionType);

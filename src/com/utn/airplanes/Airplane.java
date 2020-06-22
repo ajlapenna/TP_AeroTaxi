@@ -15,6 +15,9 @@ public abstract class Airplane implements Serializable {
     private int countFlights;
     private int flightFare; //(Tarifa del tipo de avión)
 
+    public Airplane() {
+    }
+
     public Airplane(double fuelCapacity, int maxPassengerCapacity,
                     double topSpeed, EPropulsionType ePropulsionType) {
         this.id = Toolbox.setId();

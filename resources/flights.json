@@ -14,7 +14,7 @@
   "arrivalCity" : "Buenos Aires",
   "distance" : 950,
   "departing" : [ 2020, 6, 21 ],
-  "passengers" : [ "java.util.LinkedList", [ [ "com.utn.passenger.Passenger", {
+  "passengers" : [ "java.util.LinkedList", [ [ "com.utn.person.Passenger", {
     "name" : "Agus",
     "lastName" : "Iri",
     "dni" : "40138021",
@@ -25,7 +25,7 @@
     "flights" : [ "java.util.ArrayList", [ ] ]
   } ] ] ],
   "flightTickets" : [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.FlightTicket", {
-    "mainPassenger" : [ "com.utn.passenger.Passenger", {
+    "mainPassenger" : [ "com.utn.person.Passenger", {
       "name" : "Agus",
       "lastName" : "Iri",
       "dni" : "40138021",

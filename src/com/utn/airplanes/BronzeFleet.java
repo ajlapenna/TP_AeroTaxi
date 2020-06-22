@@ -3,6 +3,7 @@ package com.utn.airplanes;
 import com.utn.enums.EPropulsionType;
 
 public class BronzeFleet extends Airplane {
+    public BronzeFleet() {}
 
     public BronzeFleet(double fuelCapacity, int maxPassengerCapacity, double topSpeed,
                        EPropulsionType ePropulsionType) {

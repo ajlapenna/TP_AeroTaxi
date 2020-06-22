@@ -3,5 +3,6 @@
   "name" : "Agus",
   "lastName" : "Lapee",
   "dni" : "38283270",
-  "age" : 26
+  "age" : 26,
+  "deleted" : false
 } ] ] ]

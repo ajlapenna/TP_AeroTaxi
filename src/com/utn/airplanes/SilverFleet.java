@@ -4,6 +4,8 @@ import com.utn.enums.EPropulsionType;
 
 public class SilverFleet extends Airplane implements IExtraServices {
 
+    public SilverFleet() {
+    }
     public SilverFleet(double fuelCapacity, int maxPassengerCapacity, double topSpeed,
                        EPropulsionType ePropulsionType) {
         super(fuelCapacity, maxPassengerCapacity, topSpeed, ePropulsionType);
