@@ -1,5 +1,6 @@
 package com.utn.aerotaxi;
 
+import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.person.Passenger;
 
@@ -13,10 +14,19 @@ public class FlightTicket implements Serializable {
     private ECities departureCity;
     private ECities arrivalCity;
     private int numberOfPassengers;
-    private Double totalTicketCost;
+    private double totalTicketCost;
     private boolean status;
+    private Airplane airplane;
 
     public FlightTicket() {
+    }
+
+    public FlightTicket(Passenger passenger){
+        this.mainPassenger = passenger;
+        this.totalTicketCost = 0;
+        this.numberOfPassengers = 0;
+        this.arrivalCity = null;
+        this.departureCity = null;
     }
 
     public FlightTicket(Passenger mainPassenger, LocalDate departing, ECities departureCity,
@@ -31,9 +41,42 @@ public class FlightTicket implements Serializable {
         this.totalTicketCost = setTotalTicketCost(flightCost, flightFare);
         this.status = true;
     }
-
-    public Double setTotalTicketCost(double flightCost, int flightFare) { //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo de avión)
+  
+    //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo de avión)
+    public Double setTotalTicketCost(double flightCost, int flightFare) { 
         return flightCost + ((numberOfPassengers + 1) * 3500) + flightFare;
+    }
+
+    public void setAirplane(Airplane airplane) {
+        this.airplane = airplane;
+    }
+
+    public Airplane getAirplane() {
+        return airplane;
+    }
+
+    public void setDeparting(LocalDate departing) {
+        this.departing = departing;
+    }
+
+    public void setFlightID(String flightID) {
+        this.flightID = flightID;
+    }
+
+    public void setArrivalCity(ECities arrivalCity) {
+        this.arrivalCity = arrivalCity;
+    }
+
+    public void setDepartureCity(ECities departureCity) {
+        this.departureCity = departureCity;
+    }
+
+    public void setNumberOfPassengers(int numberOfPassengers) {
+        this.numberOfPassengers = numberOfPassengers;
+    }
+  
+    public Double getTotalTicketCost() {
+        return totalTicketCost;
     }
 
     public int getNumberOfPassengers() {
@@ -62,6 +105,18 @@ public class FlightTicket implements Serializable {
 
     public boolean isStatus() {
         return status;
+
+    public LocalDate getDeparting() {
+        return departing;
+    }
+
+    public ECities getArrivalCity() {
+        return arrivalCity;
+    }
+
+    public ECities getDepartureCity() {
+        return departureCity;
+
     }
 
     @Override

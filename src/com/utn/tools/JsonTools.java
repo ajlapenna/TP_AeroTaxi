@@ -84,7 +84,6 @@ public class JsonTools {
         if (!file.exists()) {
             try {
                 file.createNewFile();
-                //file.exists();
             } catch (IOException e) {
                 e.printStackTrace();
             }
