@@ -32,7 +32,7 @@ public class Toolbox implements Serializable {
         return Math.round(Math.random() * (150 - 300 + 1) + 300 * 100d) / 100d;
     }
 
-    ///Print all the employees from the current site
+    ///Print all the passengers
     public static String printTicketsFlight(List<FlightTicket> flightTickets, Flight flight) {
         if (flightTickets == null) {
             return "E R R O R Ticket not exist.";
@@ -40,16 +40,18 @@ public class Toolbox implements Serializable {
             return "No tickets added to the fight";
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
-            stringOfPassengers.append("from: " + flight.getDepartureCity().getCityName() + "\n");
-            stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
+            stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
+            stringOfPassengers.append("to: ").append(flight.getArrivalCity().getCityName()).append("\n");
             for (FlightTicket ticket : flightTickets) {
-                int i = 1;
-                stringOfPassengers.append("[").append(i).append("] ");
-                stringOfPassengers.append("\tName: ");
-                stringOfPassengers.append(ticket.getMainPassenger().getName());
-                stringOfPassengers.append("  Dni: ");
-                stringOfPassengers.append(ticket.getMainPassenger().getDni());
-                stringOfPassengers.append("\n");
+                if (ticket.isStatus()) {
+                    int i = 1;
+                    stringOfPassengers.append("[").append(i).append("] ");
+                    stringOfPassengers.append("\tName: ");
+                    stringOfPassengers.append(ticket.getMainPassenger().getName());
+                    stringOfPassengers.append("  Dni: ");
+                    stringOfPassengers.append(ticket.getMainPassenger().getDni());
+                    stringOfPassengers.append("\n");
+                }
             }
             return "\nPassengers of the Flight "+ ":\n" + stringOfPassengers.toString();
         }
