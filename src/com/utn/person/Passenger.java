@@ -1,6 +1,9 @@
 package com.utn.person;
 
 import com.utn.aerotaxi.Flight;
+import com.utn.airplanes.BronzeFleet;
+import com.utn.airplanes.GoldFleet;
+import com.utn.airplanes.SilverFleet;
 
 import java.util.ArrayList;
 import java.util.Objects;
@@ -31,8 +34,17 @@ public class Passenger extends Person {
         return bestAirplane;
     }
 
-    public void setBestAirplane(String bestAirplane) {
-        this.bestAirplane = bestAirplane;
+    public void setBestAirplane() {
+        if (!flights.isEmpty()) {
+            for (Flight f : flights) {
+                if (f.getAirplane() instanceof BronzeFleet)
+                    bestAirplane = "Bronze";
+                else if (f.getAirplane() instanceof SilverFleet)
+                    bestAirplane = "Silver";
+                else if (f.getAirplane() instanceof GoldFleet)
+                    bestAirplane = "Gold";
+            }
+        }
     }
 
     public ArrayList<Flight> getFlights() {
