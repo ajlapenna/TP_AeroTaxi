@@ -1,7 +1,10 @@
 package com.utn.enums;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 
+@JsonFormat(shape = JsonFormat.Shape.OBJECT)
 public enum EDistance implements Serializable {
 
     BsAsCordoba(ECities.BSAS,ECities.CBA,695),

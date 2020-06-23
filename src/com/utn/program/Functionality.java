@@ -6,6 +6,7 @@ import com.utn.aerotaxi.FlightTicket;
 import com.utn.enums.ECities;
 import com.utn.enums.EDistance;
 import com.utn.person.*;
+import com.utn.tools.JsonTools;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -15,7 +16,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 public class Functionality {
-    private Company com;
+    private static Company com;
     private static final Scanner scan = new Scanner(System.in);
     private static final Pattern pdni = Pattern.compile("\\\\d{8}\"");
 
@@ -83,9 +84,9 @@ public class Functionality {
             else flag = 1;
         } while (flag == 0);
         if (p instanceof Admin)
-                menuAdmin();
+                menuAdmin((Admin)p);
             else if (p instanceof Passenger)
-                menuPassenger();
+                menuPassenger((Passenger)p);
 
     }
 
@@ -118,7 +119,7 @@ public class Functionality {
     }
 
 
-    public void menuPassenger (Passenger p) {
+    private static void menuPassenger (Passenger p) {
         //TODO
         System.out.println("1. Contratar un nuevo vuelo");
         System.out.println("2. Cancelar un vuelo");
@@ -156,7 +157,7 @@ public class Functionality {
         return null;
     }
 
-    public boolean createFlightTicket(FlightTicket newFlightTicket) {
+    private static boolean createFlightTicket(FlightTicket newFlightTicket) {
 
         boolean confirmed = false;
         //pido datos por teclado llamando a los metodos correspondientes
@@ -194,7 +195,7 @@ public class Functionality {
         return confirmed;
     }
 
-    public int confirmedflight(FlightTicket newFlightTicket) {
+    private static int confirmedflight(FlightTicket newFlightTicket) {
         int rta = 0;
 
         try {
@@ -210,7 +211,7 @@ public class Functionality {
         return rta;
     }
 
-    public void buyFlight(Passenger p) {
+    private static void buyFlight(Passenger p) {
         FlightTicket newFlightTicket = new FlightTicket(p);
         boolean confirmed;
 
@@ -235,6 +236,7 @@ public class Functionality {
             }
             //Agregamos ticket a Flight
             flight.addFlightTicket(newFlightTicket);
+            JsonTools.writeJson(com.getFlights(),JsonTools.fflights);
             System.out.println("Vuelo registrado correctamente");
         } else {
             System.out.println("El vuelo no se ha registrado");
@@ -242,7 +244,7 @@ public class Functionality {
 
     }
 
-    public LocalDate insertDepartingDate() {
+    private static LocalDate insertDepartingDate() {
         LocalDate date = null;
         try {
             System.out.println("Introduzca la fecha con formato dd/mm/yyyy");
@@ -256,7 +258,7 @@ public class Functionality {
         return date;
     }
 
-    public ECities insertDepartureCity() {
+    private static ECities insertDepartureCity() {
         ECities rta = null;
 
         System.out.println("Ingrese su ciudad de origen");
@@ -270,7 +272,7 @@ public class Functionality {
         return rta;
     }
 
-    public ECities insertArrivalCity() {
+    private static ECities insertArrivalCity() {
         ECities rta = null;
 
         System.out.println("Ingrese su ciudad de destino");
@@ -285,7 +287,7 @@ public class Functionality {
         return rta;
     }
 
-    public int insertNumberOfPassengers() {
+    private static int insertNumberOfPassengers() {
         int passengers = 0;
         try {
             System.out.println("Ingrese la cantidad de pasajeros");
@@ -300,7 +302,7 @@ public class Functionality {
     }
 
     ///Busco la distacia correspondiente a un origen y destino enviado por parametro
-    public int searchDistance(ECities origen, ECities destino) {
+    private static int searchDistance(ECities origen, ECities destino) {
         int rta = 0;
         for (EDistance distancia : EDistance.values()) {
             if (distancia.getOrigen().getCityName().compareToIgnoreCase(origen.getCityName()) == 0 &&
@@ -311,7 +313,7 @@ public class Functionality {
         return rta;
     }
 
-    public double insertTicketCost(FlightTicket newTicket, int numberOfPassengers, ECities departureCity, LocalDate departingDate, int distance) {
+    private static double insertTicketCost(FlightTicket newTicket, int numberOfPassengers, ECities departureCity, LocalDate departingDate, int distance) {
 
         double ticketCost = 0;
         try {
