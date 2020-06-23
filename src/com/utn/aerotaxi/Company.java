@@ -41,9 +41,9 @@ public class Company {
         return deleted;
     }
 
-    public boolean existsPassenger(String dni){
+    public boolean existsPassenger(String dni) {
         for (Passenger p : passengers) {
-            if(p.getDni().compareToIgnoreCase(dni) == 0)
+            if (p.getDni().compareToIgnoreCase(dni) == 0)
                 return true;
         }
         return false;
@@ -102,7 +102,7 @@ public class Company {
     }
 
     public void addUser(Person user) {
-        if(user != null){
+        if (user != null) {
             if (user instanceof Passenger) {
                 passengers.add((Passenger) user);
                 JsonTools.writeJson(passengers, JsonTools.fpassengers);
@@ -124,14 +124,14 @@ public class Company {
     public Flight searchFlightForAirplaneAndDate(Airplane a, LocalDate departingDate) {
         Flight flightToSearch = null;
         for (Flight f : flights) {
-            if (f.getAirplane().equals(a) == true && departingDate.isEqual(f.getDeparting()) == true) {
+            if (f.getAirplane().equals(a) && departingDate.isEqual(f.getDeparting())) {
                 flightToSearch = f;
             }
         }
         return flightToSearch;
     }
 
-    public void showAvaibleFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+    public void showAvailableFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
 
         for (Airplane a : airplanes) {
             //Si su proximo vuelo se realiza otro día, lo muestro
@@ -147,6 +147,37 @@ public class Company {
             }
         }
     }
+
+    public String showAllFlights() {
+        StringBuilder showFlights = new StringBuilder();
+        for (Flight currentFlight : flights) {
+            /*showFlights.append("\nDespego: ");
+            if(currentFlight.isGone()){
+                showFlights.append(currentFlight.toString());
+                showFlights.append("\n");
+            }
+            else {
+                showFlights.append("Pendiente: ");
+                showFlights.append(currentFlight.toString());
+                showFlights.append("\n");
+            }*/
+            showFlights.append(currentFlight.toString());
+            showFlights.append("\n");
+        }
+        return showFlights.toString();
+    }
+
+    public String showAllFlightsByDay(LocalDate currentDate) {
+        StringBuilder showFlightByDay = new StringBuilder();
+        Flight currentFlight = null;
+        for (Airplane a : airplanes) {
+            //if((currentFlight = searchFlightForAirplaneAndDate(a, currentDate)) != null) {
+            currentFlight = searchFlightForAirplaneAndDate(a, currentDate);
+            showFlightByDay.append(currentFlight);
+            showFlightByDay.append("\n");
+        }
+        return showFlightByDay.toString();
+}
 
     public boolean existAirplane(String id) {
         boolean rta = false;

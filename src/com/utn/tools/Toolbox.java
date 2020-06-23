@@ -41,7 +41,7 @@ public class Toolbox implements Serializable {
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
             stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
-            stringOfPassengers.append("to: ").append(flight.getArrivalCity().getCityName()).append("\n");
+            stringOfPassengers.append("to: "+flight.getArrivalCity().getCityName()+"\n");
             for (FlightTicket ticket : flightTickets) {
                 if (ticket.isStatus()) {
                     int i = 1;

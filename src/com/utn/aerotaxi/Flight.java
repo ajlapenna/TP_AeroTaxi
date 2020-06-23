@@ -91,6 +91,14 @@ public class Flight implements Serializable {
         }
     }
 
+    public static int getCountOfPassengers() {
+        return countOfPassengers;
+    }
+
+    public boolean isGone() {
+        return isGone;
+    }
+
     public double getFlightCost() {
         return flightCost;
     }
