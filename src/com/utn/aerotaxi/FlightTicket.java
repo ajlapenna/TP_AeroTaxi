@@ -30,21 +30,18 @@ public class FlightTicket implements Serializable {
     }
 
     public FlightTicket(Passenger mainPassenger, LocalDate departing, ECities departureCity,
-                        ECities arrivalCity, String flightID, int numberOfPassengers,
-                        double flightCost, int flightFare) {
+                        ECities arrivalCity, String flightID, int numberOfPassengers) {
         this.mainPassenger = mainPassenger;
         this.departing = departing;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
         this.numberOfPassengers = numberOfPassengers;
         this.flightID = flightID;
-        this.totalTicketCost = setTotalTicketCost(flightCost, flightFare);
         this.status = true;
     }
-  
-    //(Cantidad de kms * Costo del km) + (cantidad de pasajeros * 3500) + (Tarifa del tipo de avión)
-    public Double setTotalTicketCost(double flightCost, int flightFare) { 
-        return flightCost + ((numberOfPassengers + 1) * 3500) + flightFare;
+
+    public void setTotalTicketCost(Double totalTicketCost) {
+        this.totalTicketCost = totalTicketCost;
     }
 
     public void setAirplane(Airplane airplane) {
@@ -105,6 +102,7 @@ public class FlightTicket implements Serializable {
 
     public boolean isStatus() {
         return status;
+    }
 
     public LocalDate getDeparting() {
         return departing;
