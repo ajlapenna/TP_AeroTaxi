@@ -30,7 +30,7 @@ public class Toolbox implements Serializable {
      * @return {@link Double} = value from 150 to 300 with only 2 decimals
      */
     public static double costRandom() {
-        return Math.round(Math.random() * (150 - 300 + 1) + 300 * 100d) / 100d;
+        return Math.round((Math.random() * (300 - 150)) + 150);
     }
 
     ///Print all the passengers
