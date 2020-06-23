@@ -1,6 +1,7 @@
 package com.utn.aerotaxi;
 
 import com.utn.airplanes.Airplane;
+import com.utn.enums.ECities;
 import com.utn.passenger.Passenger;
 import com.utn.tools.JsonTools;
 
@@ -28,7 +29,7 @@ public class Company {
     public boolean unsuscribeFlight(Passenger p, Flight flight) {
         boolean deleted = false;
         if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
-            deleted=flight.deletePassenger(p);
+            deleted = flight.deletePassenger(p);
         } else {
             System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
         }
@@ -44,19 +45,75 @@ public class Company {
         }
     }
 
-    public boolean existClient(String dni){
+    public boolean existFlightForDepartingDate(LocalDate departingDate) {
         boolean rta = false;
-        for (Passenger p : this.clients) {
-            if(p.getDni().compareToIgnoreCase(dni) == 0)
+        for (Flight f : flights) {
+            if (f.getDeparting().isEqual(departingDate) == true)
                 rta = true;
         }
         return rta;
     }
 
-    public void addClient(Passenger newClient){
-        if(newClient instanceof Passenger)
+    public boolean existClient(String dni) {
+        boolean rta = false;
+        for (Passenger p : this.clients) {
+            if (p.getDni().compareToIgnoreCase(dni) == 0)
+                rta = true;
+        }
+        return rta;
+    }
+
+    public void addClient(Passenger newClient) {
+        if (newClient instanceof Passenger)
             clients.add(newClient);
     }
+
+    public double calculateTicketCostForAirplanId(String id, int countOfPassengers, int flightDistance) {
+        double ticketCost = 0;
+        for (Airplane toSearch : airplanes) {
+            if (toSearch.getId().compareToIgnoreCase(id) == 0) {
+                ticketCost = (toSearch.getCostPerKM() * flightDistance) +
+                        (countOfPassengers * 3500) + toSearch.getFlightFare();
+            }
+        }
+        return ticketCost;
+    }
+
+
+    ///Para buscar el vuelo correspondiente a un avion, tambien necesitamos la fecha de partida del vuelo
+    public Flight searchFlightForAirplaneAndDate(Airplane a, LocalDate departingDate) {
+        Flight flightToSearch = null;
+        for (Flight f : flights) {
+            if (f.getAirplane().equals(a) == true && departingDate.isEqual(f.getDeparting()) == true) {
+                flightToSearch = f;
+            }
+        }
+        return flightToSearch;
+    }
+
+    public void showAvaibleFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+        if(airplanes.isEmpty() == false) {
+            for (Airplane a : airplanes) {
+                //Si su proximo vuelo se realiza otro día, lo muestro
+                if (a.getNextDepartingDate().isEqual(departingDate) == false) {
+                    System.out.println(a);
+                    // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+                } else if (a.getNextCity().toString().compareToIgnoreCase(departureCity.toString()) == 0) {
+                    //Si es distanta no la buscamos, ya que cada avion solo puede hacer un destino por dia
+                    //Si es igual,buscamos el flight registrado en la lista y comprobamos que su capacidad sea suficiente
+                    if (searchFlightForAirplaneAndDate(a, departingDate).getPassengers().size() <= countOfPassengers) {
+                        System.out.println(a);
+                    }
+
+                }
+            }
+        }else{
+            System.out.println("La compania no tiene aviones");
+        }
+
+
+    }
+
 
     public String getName() {
         return name;
@@ -74,11 +131,10 @@ public class Company {
         return new LinkedList<>(airplanes);
     }
 
-    public void addPassenger(Passenger client)
-    {
-        if(client!=null){
+    public void addPassenger(Passenger client) {
+        if (client != null) {
             clients.add(client);
-        JsonTools.writeJson(clients,JsonTools.fpassengers);
+            JsonTools.writeJson(clients, JsonTools.fpassengers);
         }
     }
 }

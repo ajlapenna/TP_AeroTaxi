@@ -87,6 +87,10 @@ public class Flight implements Serializable {
         }
     }
 
+    public static int getCountOfPassengers() {
+        return countOfPassengers;
+    }
+
     public boolean deletePassenger(Passenger toDelete) {
         boolean result = false;
         for (Passenger p : passengers) {

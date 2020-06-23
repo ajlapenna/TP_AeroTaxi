@@ -17,4 +17,6 @@ public enum ECities implements Serializable {
 
     @JsonValue
     public String getCityName(){return this.cityName;}
+
+
 }

@@ -1,8 +1,11 @@
 package com.utn.airplanes;
 
+import com.utn.enums.ECities;
 import com.utn.enums.EPropulsionType;
 import com.utn.tools.*;
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.util.Objects;
 
 
 public abstract class Airplane implements Serializable {
@@ -14,6 +17,9 @@ public abstract class Airplane implements Serializable {
     private EPropulsionType EPropulsionType;
     private int countFlights;
     private double flightFare; //(Tarifa del tipo de avión)
+    private LocalDate nextDepartingDate;
+    private ECities nextCity;
+
 
     //Constructor//
     public Airplane() {
@@ -27,9 +33,25 @@ public abstract class Airplane implements Serializable {
         this.topSpeed = topSpeed;
         this.EPropulsionType = EPropulsionType;
         this.countFlights = 0;
-
+        this.nextCity = null;
+        this.nextDepartingDate = null;
     }
 
+    public void setNextCity(ECities nextCity) {
+        this.nextCity = nextCity;
+    }
+
+    public void setNextDepartingDate(LocalDate nextDeparting) {
+        this.nextDepartingDate = nextDeparting;
+    }
+
+    public ECities getNextCity() {
+        return nextCity;
+    }
+
+    public LocalDate getNextDepartingDate() {
+        return nextDepartingDate;
+    }
 
     public String getId() {return this.id;}
 
@@ -64,6 +86,28 @@ public abstract class Airplane implements Serializable {
 
     public abstract double flightFare();
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Airplane airplane = (Airplane) o;
+        return Double.compare(airplane.fuelCapacity, fuelCapacity) == 0 &&
+                Double.compare(airplane.costPerKM, costPerKM) == 0 &&
+                maxPassengerCapacity == airplane.maxPassengerCapacity &&
+                Double.compare(airplane.topSpeed, topSpeed) == 0 &&
+                countFlights == airplane.countFlights &&
+                Double.compare(airplane.flightFare, flightFare) == 0 &&
+                Objects.equals(id, airplane.id) &&
+                EPropulsionType == airplane.EPropulsionType &&
+                Objects.equals(nextDepartingDate, airplane.nextDepartingDate) &&
+                nextCity == airplane.nextCity;
+    }
+
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, fuelCapacity, costPerKM, maxPassengerCapacity, topSpeed, EPropulsionType, countFlights, flightFare, nextDepartingDate, nextCity);
+    }
 
     @Override
     public String toString() {
