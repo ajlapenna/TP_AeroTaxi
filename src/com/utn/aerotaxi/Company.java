@@ -207,4 +207,19 @@ public class Company {
         }
         return toSearch;
     }
+
+    public String showAllPassengers() {
+        if (passengers.isEmpty()) return "E R R O R empty list of passengers";
+        else {
+            StringBuilder stringPassengers = new StringBuilder();
+            for (int i = 0; i < passengers.size(); i++) {
+                Passenger passenger = passengers.get(i);
+                stringPassengers.append(i);
+                stringPassengers.append(" ");
+                stringPassengers.append(passenger.toString());
+                stringPassengers.append("\n");
+            }
+            return stringPassengers.toString();
+        }
+    }
 }

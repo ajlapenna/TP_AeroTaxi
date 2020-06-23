@@ -45,7 +45,7 @@ public class Functionality {
                 switch (option) {
                     case 1 -> loginMenu(com);
                     case 2 -> {
-                        Passenger pa = signUp();
+                        Passenger pa =(Passenger) signUp();
                         com.addUser(pa);
                     }
                     case 0 -> System.exit(0);
@@ -93,7 +93,7 @@ public class Functionality {
 
     }
 
-    public Passenger signUp() {
+    public static Passenger signUp() {
         Passenger newPerson = new Passenger();
         scan.nextLine();
         int flag = 1;
@@ -120,6 +120,32 @@ public class Functionality {
     }
 
 
+    public static Admin signUpAdmin() {
+        Admin newPerson = new Admin();
+        scan.nextLine();
+        int flag = 1;
+        do {
+            try {
+                System.out.print("Ingrese su nombre: ");
+                newPerson.setName(scan.nextLine());
+                System.out.print("Ingrese su apellido: ");
+                newPerson.setLastName(scan.nextLine());
+                System.out.print("Ingrese su edad: ");
+                newPerson.setAge(scan.nextInt());
+                System.out.print("Ingrese su DNI: ");
+                newPerson.setDni(scan.nextLine());
+                System.out.print("Ingrese una contraseña: ");
+                newPerson.setPassword(scan.nextLine());
+            } catch (InputMismatchException ex) {
+                System.out.println("Dato ingresado inválido.");
+                flag = 0;
+            } finally {
+                scan.nextLine();
+            }
+        } while (flag == 0);
+        return newPerson;
+    }
+
     private static void menuPassenger(Passenger p) {
         //TODO
         System.out.println("1. Contratar un nuevo vuelo");
@@ -140,6 +166,7 @@ public class Functionality {
                 System.out.println("1. Listar vuelos");
                 System.out.println("2. Listar vuelos por fecha");
                 System.out.println("3. Listar pasajeros");
+                System.out.println("4. Crear nuevo admin");
                 System.out.println("0. Salir");
                 System.out.print("\nOpción: ");
                 option = scan.nextInt();
@@ -156,8 +183,16 @@ public class Functionality {
                         System.out.println("Listar vuelos por fecha:");
                         System.out.println(com.showAllFlightsByDay(currentDate));
                     }
+                    case 3 ->{
+                        System.out.println("Listar Pasajeros:");
+                        System.out.println(com.showAllPassengers());
+                    }
+                    case 4 ->{
+                        System.out.println("Crear nuevo Admin:");
+                        Admin newAdm =signUpAdmin();
+                        com.addUser(newAdm);
+                    }
                     case 0 -> {
-                        clearScreen();
                         flag = 1;
                         loginMenu(com);
                     }

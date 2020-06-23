@@ -18,20 +18,6 @@ public class Passenger extends Person {
         flights = new ArrayList<>();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Passenger passenger = (Passenger) o;
-        return Objects.equals(getDni(), passenger.getDni()) &&
-                Objects.equals(getLastName(), passenger.getLastName()) &&
-                Objects.equals(getName(), passenger.getName());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(getDni(), getLastName(), getName());
-    }
 
     public double getTotalSpend() {
         return totalSpend;
@@ -55,5 +41,29 @@ public class Passenger extends Person {
 
     public void setFlights(ArrayList<Flight> flights) {
         this.flights = flights;
+    }
+
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Passenger passenger = (Passenger) o;
+        return Objects.equals(getDni(), passenger.getDni()) &&
+                Objects.equals(getLastName(), passenger.getLastName()) &&
+                Objects.equals(getName(), passenger.getName());
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(getDni(), getLastName(), getName());
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() +
+                " totalSpend=" + totalSpend +
+                ", bestAirplane='" + bestAirplane + '\'' +
+                ", flights=" + flights.toString();
     }
 }
