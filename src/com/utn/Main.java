@@ -23,9 +23,15 @@ public class Main {
         JsonTools.writeJson(admins, JsonTools.fadmins);*/
 
         /*List<Airplane> airplanes = new LinkedList<>();
-        airplanes.add(new GoldFleet(5000, 10, 900, EPropulsionType.REACTION));
-        airplanes.add(new SilverFleet(4000, 20, 999, EPropulsionType.PISTON));
-        airplanes.add(new BronzeFleet(6000, 30, 750, EPropulsionType.PROPELLER));
+        airplanes.add(new BronzeFleet());
+        airplanes.add(new BronzeFleet());
+        airplanes.add(new BronzeFleet());
+        airplanes.add(new SilverFleet());
+        airplanes.add(new SilverFleet());
+        airplanes.add(new SilverFleet());
+        airplanes.add(new GoldFleet());
+        airplanes.add(new GoldFleet());
+        airplanes.add(new GoldFleet());
         JsonTools.writeJson(airplanes, JsonTools.fairplanes);*/
 
         /*List<Flight> flights = new LinkedList<>();
