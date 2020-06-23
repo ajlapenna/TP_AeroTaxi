@@ -6,6 +6,7 @@ import com.utn.aerotaxi.FlightTicket;
 import com.utn.enums.ECities;
 import com.utn.enums.EDistance;
 import com.utn.person.*;
+import com.utn.tools.JsonTools;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -235,6 +236,7 @@ public class Functionality {
             }
             //Agregamos ticket a Flight
             flight.addFlightTicket(newFlightTicket);
+            JsonTools.writeJson(com.getFlights(),JsonTools.fflights);
             System.out.println("Vuelo registrado correctamente");
         } else {
             System.out.println("El vuelo no se ha registrado");

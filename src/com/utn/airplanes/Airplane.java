@@ -30,6 +30,7 @@ public abstract class Airplane implements Serializable {
         this.topSpeed = topSpeed;
         this.ePropulsionType = ePropulsionType;
         this.countFlights = 0;
+        this.nextDepartingDate= LocalDate.of(1,1,1);
     }
 
     public void setNextCity(ECities nextCity) {

@@ -76,7 +76,7 @@ public class Flight implements Serializable {
      * @return TRUE = flight ticket added.
      * FALSE = flight ticket doesn't added
      */
-    public boolean addFlightTicket(FlightTicket ticket) {
+    public boolean  addFlightTicket(FlightTicket ticket) {
         if (ticket == null) {
             return false;
         } else {
