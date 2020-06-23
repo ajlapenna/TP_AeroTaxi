@@ -29,6 +29,18 @@ public class Company {
         file = null;
     }
 
+    ///Comparo la fecha de este momento con la del vuelo -1 día,
+    ///ya que no se podran cancelar con menos de 24hs de antelacion
+    public boolean unsuscribeFlight(Passenger p, Flight flight) {
+        boolean deleted = false;
+        if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
+            deleted = flight.deletePassenger(p);
+        } else {
+            System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
+        }
+        return deleted;
+    }
+
     public boolean existsPassenger(String dni){
         for (Passenger p : passengers) {
             if(p.getDni().compareToIgnoreCase(dni) == 0)
