@@ -1,0 +1,52 @@
+[ "java.util.LinkedList", [ [ "com.utn.aerotaxi.Flight", {
+  "airplane" : [ "com.utn.airplanes.BronzeFleet", {
+    "id" : "ed8a703011",
+    "fuelCapacity" : 6000.0,
+    "costPerKM" : 299.51,
+    "maxPassengerCapacity" : 30,
+    "topSpeed" : 750.0,
+    "ePropulsionType" : "Propeller Engine",
+    "countFlights" : 1,
+    "flightFare" : 3000.0,
+    "nextDepartingDate" : [ 1, 1, 1 ],
+    "nextCity" : null
+  } ],
+  "id" : "ba906dafdb",
+  "departureCity" : "Montevideo",
+  "arrivalCity" : "Buenos Aires",
+  "distance" : 950,
+  "departing" : [ 2020, 6, 21 ],
+  "passengers" : [ "java.util.LinkedList", [ [ "com.utn.person.Passenger", {
+    "password" : null,
+    "name" : "Agus",
+    "lastName" : "Iri",
+    "dni" : "40138021",
+    "age" : 25,
+    "deleted" : false,
+    "totalSpend" : 0.0,
+    "bestAirplane" : null,
+    "flights" : [ "java.util.ArrayList", [ ] ]
+  } ] ] ],
+  "flightTickets" : [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.FlightTicket", {
+    "mainPassenger" : [ "com.utn.person.Passenger", {
+      "password" : null,
+      "name" : "Agus",
+      "lastName" : "Iri",
+      "dni" : "40138021",
+      "age" : 25,
+      "deleted" : false,
+      "totalSpend" : 0.0,
+      "bestAirplane" : null,
+      "flights" : [ "java.util.ArrayList", [ ] ]
+    } ],
+    "departing" : null,
+    "departureCity" : null,
+    "arrivalCity" : null,
+    "numberOfPassengers" : 7,
+    "totalTicketCost" : 0.0,
+    "status" : false,
+    "airplane" : null
+  } ] ] ],
+  "flightCost" : 0.0,
+  "gone" : false
+} ] ] ]
