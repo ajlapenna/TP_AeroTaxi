@@ -28,4 +28,14 @@
   "totalSpend" : 0.0,
   "bestAirplane" : null,
   "flights" : [ "java.util.ArrayList", [ ] ]
+} ], [ "com.utn.person.Passenger", {
+  "password" : "1234",
+  "name" : "prueba",
+  "lastName" : "test",
+  "dni" : "7654321",
+  "age" : 90,
+  "deleted" : false,
+  "totalSpend" : 0.0,
+  "bestAirplane" : null,
+  "flights" : null
 } ] ] ]

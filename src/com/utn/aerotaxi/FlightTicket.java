@@ -77,7 +77,7 @@ public class FlightTicket implements Serializable {
     }
 
     public int getNumberOfPassengers() {
-        return numberOfPassengers + 1;
+        return numberOfPassengers;
     }
 
     public Passenger getMainPassenger() {

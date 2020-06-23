@@ -12,11 +12,11 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Passenger> passengers = new LinkedList<>();
+        /*List<Passenger> passengers = new LinkedList<>();
         passengers.add(new Passenger("Agus", "Iri", "40138021", 25, "1234"));
         passengers.add(new Passenger("Agus", "Lap", "33984783", 25, "1234"));
         passengers.add(new Passenger("Gonza", "rom", "99789654", 25, "1234"));
-        JsonTools.writeJson(passengers, JsonTools.fpassengers);
+        JsonTools.writeJson(passengers, JsonTools.fpassengers);*/
 
        /* List<Admin> admins = new LinkedList<>();
         admins.add(new Admin("Agus", "Lapee", "38283270", 26, "1234"));
@@ -48,6 +48,4 @@ public class Main {
         Functionality start = new Functionality(com1);
         start.startupMenu();
     }
-
-
 }
