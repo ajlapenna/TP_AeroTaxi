@@ -18,9 +18,9 @@ public class Main {
         passengers.add(new Passenger("Gonza", "rom", "99789654", 25, "1234"));
         JsonTools.writeJson(passengers, JsonTools.fpassengers);
 
-        List<Admin> admins = new LinkedList<>();
+       /* List<Admin> admins = new LinkedList<>();
         admins.add(new Admin("Agus", "Lapee", "38283270", 26, "1234"));
-        JsonTools.writeJson(admins, JsonTools.fadmins);
+        JsonTools.writeJson(admins, JsonTools.fadmins);*/
 
         /*List<Airplane> airplanes = new LinkedList<>();
         airplanes.add(new GoldFleet(5000, 10, 900, EPropulsionType.REACTION));

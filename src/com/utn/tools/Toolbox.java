@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class Toolbox implements Serializable {
-    Toolbox() {}
+    Toolbox() {
+    }
 
     /**
      * Get a random UUID , transform it to String,
@@ -34,6 +35,7 @@ public class Toolbox implements Serializable {
 
     ///Print all the passengers
     public static String printTicketsFlight(List<FlightTicket> flightTickets, Flight flight) {
+        if (flight == null) return "E R R O R Flight not exist.";
         if (flightTickets == null) {
             return "E R R O R Ticket not exist.";
         } else if (flightTickets.isEmpty()) {
@@ -41,7 +43,7 @@ public class Toolbox implements Serializable {
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
             stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
-            stringOfPassengers.append("to: "+flight.getArrivalCity().getCityName()+"\n");
+            stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
             for (FlightTicket ticket : flightTickets) {
                 if (ticket.isStatus()) {
                     int i = 1;
@@ -53,27 +55,26 @@ public class Toolbox implements Serializable {
                     stringOfPassengers.append("\n");
                 }
             }
-            return "\nPassengers of the Flight "+ ":\n" + stringOfPassengers.toString();
+            return "\nPassengers of the Flight " + ":\n" + stringOfPassengers.toString();
         }
     }
 
-    public static Flight searchFlightPerID(String id, LinkedList<Flight> flights)
-    {
+    public static Flight searchFlightPerID(String id, LinkedList<Flight> flights) {
         Flight flight = null;
-        for (Flight currentFlight : flights){
-            if(currentFlight.getId().equalsIgnoreCase(id)){
-                flight=currentFlight;
+        for (Flight currentFlight : flights) {
+            if (currentFlight.getId().equalsIgnoreCase(id)) {
+                flight = currentFlight;
             }
         }
         return flight;
     }
 
-    public static boolean checkAge(int age){
+    public static boolean checkAge(int age) {
         return (age > 0) && (age < 100);
     }
 
-    public static boolean checkDni(String dni){
-        return (dni.length() > 0) && (dni.length() < 8);
+    public static boolean checkDni(String dni) {
+        return (dni.length() > 6) && (dni.length() < 9);
     }
 
 }

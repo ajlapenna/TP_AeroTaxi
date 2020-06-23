@@ -5,4 +5,11 @@
   "dni" : "38283270",
   "age" : 26,
   "deleted" : false
+} ], [ "com.utn.person.Admin", {
+  "password" : "1234",
+  "name" : "gonzalo",
+  "lastName" : "romero",
+  "dni" : "33953999",
+  "age" : 31,
+  "deleted" : false
 } ] ] ]

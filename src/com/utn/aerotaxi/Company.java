@@ -131,6 +131,18 @@ public class Company {
         return flightToSearch;
     }
 
+    public String showAllFlightsByDay(LocalDate departingDate) {
+        StringBuilder flightOftheDay= new StringBuilder();
+
+        for (Flight f : flights) {
+            if (departingDate.isEqual(f.getDeparting())) {
+                flightOftheDay.append(f.toString());
+                flightOftheDay.append("\n");
+            }
+        }
+        return flightOftheDay.toString();
+    }
+
     public void showAvailableFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
 
         for (Airplane a : airplanes) {
@@ -166,18 +178,6 @@ public class Company {
         }
         return showFlights.toString();
     }
-
-    public String showAllFlightsByDay(LocalDate currentDate) {
-        StringBuilder showFlightByDay = new StringBuilder();
-        Flight currentFlight = null;
-        for (Airplane a : airplanes) {
-            //if((currentFlight = searchFlightForAirplaneAndDate(a, currentDate)) != null) {
-            currentFlight = searchFlightForAirplaneAndDate(a, currentDate);
-            showFlightByDay.append(currentFlight);
-            showFlightByDay.append("\n");
-        }
-        return showFlightByDay.toString();
-}
 
     public boolean existAirplane(String id) {
         boolean rta = false;

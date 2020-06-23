@@ -19,8 +19,7 @@ public class Functionality {
     private static Company com;
     private static final Scanner scan = new Scanner(System.in);
 
-    public Functionality() {
-    }
+    public Functionality() {}
 
     public static void clearScreen() {
         for (int i = 0; i < 80 * 300; i++) {
@@ -32,7 +31,7 @@ public class Functionality {
         this.com = company;
     }
 
-    public void startupMenu() {
+    public static void startupMenu() {
         int option = -1;
         do {
             try {
@@ -141,12 +140,10 @@ public class Functionality {
                     System.out.print("Ingrese su edad: ");
                     newPerson.setAge(scan.nextInt());
                 } while (!Toolbox.checkAge(newPerson.getAge()));
-                scan.nextLine();
                 do {
                 System.out.print("Ingrese su DNI: ");
                 newPerson.setDni(scan.nextLine());
                 } while (!Toolbox.checkDni(newPerson.getDni()));
-                scan.nextLine();
                 System.out.print("Ingrese una contraseña: ");
                 newPerson.setPassword(scan.nextLine());
             } catch (InputMismatchException ex) {
@@ -184,7 +181,6 @@ public class Functionality {
                 System.out.print("\nOpción: ");
                 option = scan.nextInt();
 
-
                 switch (option) {
                     case 1 -> {
                         System.out.println("Listar vuelos:");
@@ -207,7 +203,7 @@ public class Functionality {
                     }
                     case 0 -> {
                         flag = 1;
-                        loginMenu(com);
+                        startupMenu();
                     }
                     default -> throw new IllegalStateException("Unexpected value: " + option);
                 }
