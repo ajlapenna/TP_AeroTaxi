@@ -67,4 +67,13 @@ public class Toolbox implements Serializable {
         }
         return flight;
     }
+
+    public static boolean checkAge(int age){
+        return (age > 0) && (age < 100);
+    }
+
+    public static boolean checkDni(String dni){
+        return (dni.length() > 0) && (dni.length() < 8);
+    }
+
 }

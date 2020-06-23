@@ -7,6 +7,7 @@ import com.utn.enums.ECities;
 import com.utn.enums.EDistance;
 import com.utn.person.*;
 import com.utn.tools.JsonTools;
+import com.utn.tools.Toolbox;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -45,7 +46,7 @@ public class Functionality {
                 switch (option) {
                     case 1 -> loginMenu(com);
                     case 2 -> {
-                        Passenger pa =(Passenger) signUp();
+                        Passenger pa = (Passenger) signUp();
                         com.addUser(pa);
                     }
                     case 0 -> System.exit(0);
@@ -103,10 +104,16 @@ public class Functionality {
                 newPerson.setName(scan.nextLine());
                 System.out.print("Ingrese su apellido: ");
                 newPerson.setLastName(scan.nextLine());
-                System.out.print("Ingrese su edad: ");
-                newPerson.setAge(scan.nextInt());
-                System.out.print("Ingrese su DNI: ");
-                newPerson.setDni(scan.nextLine());
+                do {
+                    System.out.print("Ingrese su edad: ");
+                    newPerson.setAge(scan.nextInt());
+                } while (!Toolbox.checkAge(newPerson.getAge()));
+                scan.nextLine();
+                do {
+                    System.out.print("Ingrese su DNI: ");
+                    newPerson.setDni(scan.nextLine());
+                } while (!Toolbox.checkDni(newPerson.getDni()));
+                scan.nextLine();
                 System.out.print("Ingrese una contraseña: ");
                 newPerson.setPassword(scan.nextLine());
             } catch (InputMismatchException ex) {
@@ -130,10 +137,16 @@ public class Functionality {
                 newPerson.setName(scan.nextLine());
                 System.out.print("Ingrese su apellido: ");
                 newPerson.setLastName(scan.nextLine());
-                System.out.print("Ingrese su edad: ");
-                newPerson.setAge(scan.nextInt());
+                do {
+                    System.out.print("Ingrese su edad: ");
+                    newPerson.setAge(scan.nextInt());
+                } while (!Toolbox.checkAge(newPerson.getAge()));
+                scan.nextLine();
+                do {
                 System.out.print("Ingrese su DNI: ");
                 newPerson.setDni(scan.nextLine());
+                } while (!Toolbox.checkDni(newPerson.getDni()));
+                scan.nextLine();
                 System.out.print("Ingrese una contraseña: ");
                 newPerson.setPassword(scan.nextLine());
             } catch (InputMismatchException ex) {
@@ -160,7 +173,7 @@ public class Functionality {
 
     public static void menuAdmin(Admin a) {
         //TODO
-        int flag = 0, option=0;
+        int flag = 0, option = 0;
         try {
             do {
                 System.out.println("1. Listar vuelos");
@@ -183,13 +196,13 @@ public class Functionality {
                         System.out.println("Listar vuelos por fecha:");
                         System.out.println(com.showAllFlightsByDay(currentDate));
                     }
-                    case 3 ->{
+                    case 3 -> {
                         System.out.println("Listar Pasajeros:");
                         System.out.println(com.showAllPassengers());
                     }
-                    case 4 ->{
+                    case 4 -> {
                         System.out.println("Crear nuevo Admin:");
-                        Admin newAdm =signUpAdmin();
+                        Admin newAdm = signUpAdmin();
                         com.addUser(newAdm);
                     }
                     case 0 -> {
