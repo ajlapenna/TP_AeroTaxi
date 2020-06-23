@@ -88,6 +88,10 @@ public class Company {
         else
             airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);
     }
+    public void addFlight(Flight toAdd){
+        if(toAdd instanceof Flight)
+            flights.add(toAdd);
+    }
 
     public LinkedList<Passenger> getPassengers() {
         return new LinkedList<>(passengers);
@@ -123,16 +127,18 @@ public class Company {
 
     public Flight searchFlightForAirplaneAndDate(Airplane a, LocalDate departingDate) {
         Flight flightToSearch = null;
-        for (Flight f : flights) {
-            if (f.getAirplane().equals(a) && departingDate.isEqual(f.getDeparting())) {
-                flightToSearch = f;
+        if (flights != null) {
+            for (Flight f : flights) {
+                if (f.getAirplane().equals(a) && departingDate.isEqual(f.getDeparting())) {
+                    flightToSearch = f;
+                }
             }
         }
         return flightToSearch;
     }
 
     public String showAllFlightsByDay(LocalDate departingDate) {
-        StringBuilder flightOftheDay= new StringBuilder();
+        StringBuilder flightOftheDay = new StringBuilder();
 
         for (Flight f : flights) {
             if (departingDate.isEqual(f.getDeparting())) {
@@ -143,21 +149,24 @@ public class Company {
         return flightOftheDay.toString();
     }
 
-    public void showAvailableFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
-
+    public boolean showAvailableAirplanes(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+        boolean flag = false;// Esta bandera se utiliza para saber si aunquesea se muestra un avion, caso contrario imprime mensaje
         for (Airplane a : airplanes) {
-            //Si su proximo vuelo se realiza otro día, lo muestro
-            if (!a.getNextDepartingDate().isEqual(departingDate)) {
-                System.out.println(a.toString());
-                // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
-            } else if (a.getNextCity() == departureCity) {
-                //Si es distanta no la buscamos, ya que cada avion solo puede hacer un destino por dia
-                //Si es igual,buscamos el flight registrado en la lista y comprobamos que su capacidad sea suficiente
-                if (searchFlightForAirplaneAndDate(a, departingDate).getPassengers().size() <= countOfPassengers) {
+            //Primero que nada evalúo la capacidad del avion
+            if (a.getMaxPassengerCapacity() >= countOfPassengers) {
+                //Si su proximo vuelo se realiza otro día, lo muestro
+                if (!a.getNextDepartingDate().isEqual(departingDate)) {
+                    System.out.println(a.toString());
+                   flag = true;
+                    // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+                } else if (a.getNextCity() == departureCity) {
+                    //Si es distanta no lo mostramos, ya que cada avion solo puede hacer un destino por dia
                     System.out.println(a);
+                    flag = true;
                 }
             }
         }
+        return flag;
     }
 
     public String showAllFlights() {

@@ -19,7 +19,8 @@ public class Functionality {
     private static Company com;
     private static final Scanner scan = new Scanner(System.in);
 
-    public Functionality() {}
+    public Functionality() {
+    }
 
     public static void clearScreen() {
         for (int i = 0; i < 80 * 300; i++) {
@@ -43,20 +44,24 @@ public class Functionality {
                 option = scan.nextInt();
 
                 switch (option) {
-                    case 1 -> loginMenu(com);
-                    case 2 -> {
+                    case 1:
+                        loginMenu(com);
+                        break;
+                    case 2:
                         Passenger pa = (Passenger) signUp();
                         com.addUser(pa);
-                    }
-                    case 0 -> System.exit(0);
-                    default -> {
+                        break;
+                    case 0:
+                        System.exit(0);
+                        break;
+                    default:
                         System.out.println("E R R O R! not a correct option. ");
                         try {
                             Thread.sleep(1000);
                         } catch (InterruptedException ex) {
                             ex.printStackTrace();
                         }
-                    }
+
                 }
             } catch (InputMismatchException ex) {
                 clearScreen();
@@ -141,8 +146,8 @@ public class Functionality {
                     newPerson.setAge(scan.nextInt());
                 } while (!Toolbox.checkAge(newPerson.getAge()));
                 do {
-                System.out.print("Ingrese su DNI: ");
-                newPerson.setDni(scan.nextLine());
+                    System.out.print("Ingrese su DNI: ");
+                    newPerson.setDni(scan.nextLine());
                 } while (!Toolbox.checkDni(newPerson.getDni()));
                 System.out.print("Ingrese una contraseña: ");
                 newPerson.setPassword(scan.nextLine());
@@ -182,30 +187,31 @@ public class Functionality {
                 option = scan.nextInt();
 
                 switch (option) {
-                    case 1 -> {
+                    case 1:
                         System.out.println("Listar vuelos:");
                         System.out.println(com.showAllFlights());
-                    }
-                    case 2 -> {
+                        break;
+                    case 2:
                         System.out.println("Listar vuelos por fecha:");
                         LocalDate currentDate = insertDepartingDate();
                         System.out.println("Listar vuelos por fecha:");
                         System.out.println(com.showAllFlightsByDay(currentDate));
-                    }
-                    case 3 -> {
+                        break;
+                    case 3:
                         System.out.println("Listar Pasajeros:");
                         System.out.println(com.showAllPassengers());
-                    }
-                    case 4 -> {
+                        break;
+                    case 4:
                         System.out.println("Crear nuevo Admin:");
                         Admin newAdm = signUpAdmin();
                         com.addUser(newAdm);
-                    }
-                    case 0 -> {
+                        break;
+                    case 0:
                         flag = 1;
                         startupMenu();
-                    }
-                    default -> throw new IllegalStateException("Unexpected value: " + option);
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + option);
                 }
             } while (flag == 0);
         } catch (InputMismatchException ex) {
@@ -258,14 +264,17 @@ public class Functionality {
         int distance = searchDistance(newFlightTicket.getDepartureCity(), newFlightTicket.getArrivalCity());
 
         while (newFlightTicket.getTotalTicketCost() == 0) {
-            newFlightTicket.setTotalTicketCost(insertTicketCost(newFlightTicket, newFlightTicket.getNumberOfPassengers(),
-                    newFlightTicket.getDepartureCity(), newFlightTicket.getDeparting(), distance));
+            double ticketCost = 0;
+            ticketCost = insertTicketCost(newFlightTicket, newFlightTicket.getNumberOfPassengers(),
+                    newFlightTicket.getDepartureCity(), newFlightTicket.getDeparting(), distance);
+            if(ticketCost != -1)
+                newFlightTicket.setTotalTicketCost(ticketCost);
         }
         ///Al tener precio calculado, preguntamos si desea confirmar su vuelo
-
-        if (confirmedflight(newFlightTicket) == 1)
-            confirmed = true;
-
+        if (newFlightTicket.getTotalTicketCost() != -1) {
+            if (confirmedflight(newFlightTicket) == 1)
+                 confirmed = true;
+        }
         return confirmed;
     }
 
@@ -295,8 +304,8 @@ public class Functionality {
         if (confirmed) {
             ///Si el usuario confirma hay que agregarlo a un Flight ya existente o crear una nueva instancia de Flight
             // y agregar el ticket ahí
-            ///no olvidar asignar ID en flightTicket
             Flight flight = com.searchFlightForAirplaneAndDate(newFlightTicket.getAirplane(), newFlightTicket.getDeparting());
+
             if (flight != null) {
                 newFlightTicket.setFlightID(flight.getId());
             } else {
@@ -304,12 +313,16 @@ public class Functionality {
                 flight = new Flight(newFlightTicket.getAirplane(), newFlightTicket.getDepartureCity(),
                         newFlightTicket.getArrivalCity(), newFlightTicket.getDeparting());
                 flight.addPassenger(newFlightTicket.getMainPassenger());
+
+                //Lo agregamos a la lista de vuelos en company
+                com.addFlight(flight);
                 //Registramos proxima fecha de salida para el avion con su proximo destino
                 newFlightTicket.getAirplane().setNextCity(newFlightTicket.getArrivalCity());
                 newFlightTicket.getAirplane().setNextDepartingDate(newFlightTicket.getDeparting());
             }
             //Agregamos ticket a Flight
             flight.addFlightTicket(newFlightTicket);
+            //persistimos datos
             JsonTools.writeJson(com.getFlights(), JsonTools.fflights);
             System.out.println("Vuelo registrado correctamente");
         } else {
@@ -392,17 +405,21 @@ public class Functionality {
 
         double ticketCost = 0;
         try {
-            System.out.println("Por favor, seleccione el ID del avion en el que desea viajar");
-            com.showAvailableFlights(numberOfPassengers, departureCity, departingDate);
-            String id = scan.nextLine();
-            ///Corroboramos que exista el avion
-            if (com.existAirplane(id)) {
-                ///Calculamos el costo
-                ticketCost = com.calculateTicketCostForAirplanId(id, numberOfPassengers, distance);
-                ///Guardamos el avion en el ticket
-                newTicket.setAirplane(com.searchAirplaneForId(id));
+            if (com.showAvailableAirplanes(numberOfPassengers, departureCity, departingDate)) {
+                System.out.println("Por favor, seleccione el ID del avion en el que desea viajar");
+                String id = scan.nextLine();
+                ///Corroboramos que exista el avion
+                if (com.existAirplane(id)) {
+                    ///Calculamos el costo
+                    ticketCost = com.calculateTicketCostForAirplanId(id, numberOfPassengers, distance);
+                    ///Guardamos el avion en el ticket
+                    newTicket.setAirplane(com.searchAirplaneForId(id));
+                } else {
+                    System.out.println("El avion ingresado no existe");
+                }
             } else {
-                System.out.println("El avion ingresado no existe");
+                System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
+                ticketCost = -1;
             }
         } catch (InputMismatchException e) {
             System.out.println("El id ingresado es inválido");

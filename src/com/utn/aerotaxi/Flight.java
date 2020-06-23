@@ -24,6 +24,7 @@ public class Flight implements Serializable {
     private boolean isGone;///<!--- Despego?
 
     public Flight() {
+
     }
 
     public Flight(Airplane airplane, ECities departureCity,
@@ -37,6 +38,8 @@ public class Flight implements Serializable {
             this.distance = setDistance();
             setFlightCost();
             this.isGone = false;
+            this.passengers = new LinkedList<>();
+            this.flightTickets = new LinkedList<>();
         }
     }
 
