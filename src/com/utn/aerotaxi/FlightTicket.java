@@ -9,7 +9,7 @@ import java.time.LocalDate;
 
 public class FlightTicket implements Serializable {
     private String flightID;
-    private Passenger mainPassenger;
+    private String mainPassenger;
     private LocalDate departing;
     private ECities departureCity;
     private ECities arrivalCity;
@@ -21,17 +21,17 @@ public class FlightTicket implements Serializable {
     public FlightTicket() {
     }
 
-    public FlightTicket(Passenger passenger){
+    /*public FlightTicket(Passenger passenger){
         this.mainPassenger = passenger;
         this.totalTicketCost = 0;
         this.numberOfPassengers = 0;
         this.arrivalCity = null;
         this.departureCity = null;
-    }
+    }*/
 
     public FlightTicket(Passenger mainPassenger, LocalDate departing, ECities departureCity,
                         ECities arrivalCity, String flightID, int numberOfPassengers) {
-        this.mainPassenger = mainPassenger;
+        this.mainPassenger = mainPassenger.getDni() + mainPassenger.getName();
         this.departing = departing;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
@@ -80,7 +80,7 @@ public class FlightTicket implements Serializable {
         return numberOfPassengers;
     }
 
-    public Passenger getMainPassenger() {
+    public String getMainPassenger() {
         return mainPassenger;
     }
 

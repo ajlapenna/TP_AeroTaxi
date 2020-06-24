@@ -88,8 +88,9 @@ public class Company {
         else
             airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);
     }
-    public void addFlight(Flight toAdd){
-        if(toAdd instanceof Flight)
+
+    public void addFlight(Flight toAdd) {
+        if (toAdd != null)
             flights.add(toAdd);
     }
 
@@ -157,7 +158,7 @@ public class Company {
                 //Si su proximo vuelo se realiza otro día, lo muestro
                 if (!a.getNextDepartingDate().isEqual(departingDate)) {
                     System.out.println(a.toString());
-                   flag = true;
+                    flag = true;
                     // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
                 } else if (a.getNextCity() == departureCity) {
                     //Si es distanta no lo mostramos, ya que cada avion solo puede hacer un destino por dia
@@ -172,16 +173,6 @@ public class Company {
     public String showAllFlights() {
         StringBuilder showFlights = new StringBuilder();
         for (Flight currentFlight : flights) {
-            /*showFlights.append("\nDespego: ");
-            if(currentFlight.isGone()){
-                showFlights.append(currentFlight.toString());
-                showFlights.append("\n");
-            }
-            else {
-                showFlights.append("Pendiente: ");
-                showFlights.append(currentFlight.toString());
-                showFlights.append("\n");
-            }*/
             showFlights.append(currentFlight.toString());
             showFlights.append("\n");
         }

@@ -1,6 +1,7 @@
 package com.utn.person;
 
 import com.utn.aerotaxi.Flight;
+import com.utn.aerotaxi.FlightTicket;
 import com.utn.airplanes.BronzeFleet;
 import com.utn.airplanes.GoldFleet;
 import com.utn.airplanes.SilverFleet;
@@ -11,14 +12,16 @@ import java.util.Objects;
 public class Passenger extends Person {
     private double totalSpend;
     private String bestAirplane;
-    private ArrayList<Flight> flights;
+    private ArrayList<FlightTicket> flightTickets = new ArrayList<>();
 
-    public Passenger() {}
+    public Passenger() {
+    }
+
     public Passenger(String name, String lastName, String dni, int age, String password) {
         super(name, lastName, dni, age, password);
         totalSpend = 0;
         bestAirplane = null;
-        flights = new ArrayList<>();
+        flightTickets = new ArrayList<>();
     }
 
 
@@ -35,8 +38,8 @@ public class Passenger extends Person {
     }
 
     public void setBestAirplane() {
-        if (!flights.isEmpty()) {
-            for (Flight f : flights) {
+        if (!flightTickets.isEmpty()) {
+            for (FlightTicket f : flightTickets) {
                 if (f.getAirplane() instanceof BronzeFleet)
                     bestAirplane = "Bronze";
                 else if (f.getAirplane() instanceof SilverFleet)
@@ -47,12 +50,17 @@ public class Passenger extends Person {
         }
     }
 
-    public ArrayList<Flight> getFlights() {
-        return flights;
+    public ArrayList<FlightTicket> getFlightTickets() {
+        return flightTickets;
     }
 
-    public void setFlights(ArrayList<Flight> flights) {
-        this.flights = flights;
+    public void setFlightTickets(ArrayList<FlightTicket> flightTickets) {
+        this.flightTickets = flightTickets;
+    }
+
+    public void addFlight(FlightTicket f) {
+        if (f != null)
+            flightTickets.add(f);
     }
 
 
@@ -76,6 +84,6 @@ public class Passenger extends Person {
         return super.toString() +
                 " totalSpend=" + totalSpend +
                 ", bestAirplane='" + bestAirplane + '\'' +
-                ", flights=" + flights.toString();
+                ", flights=" + flightTickets;
     }
 }

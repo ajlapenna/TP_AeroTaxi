@@ -3,39 +3,30 @@
   "name" : "Agus",
   "lastName" : "Iri",
   "dni" : "40138021",
-  "age" : 25,
+  "age" : 23,
   "deleted" : false,
   "totalSpend" : 0.0,
   "bestAirplane" : null,
-  "flights" : [ "java.util.ArrayList", [ ] ]
-} ], [ "com.utn.person.Passenger", {
-  "password" : "1234",
-  "name" : "Agus",
-  "lastName" : "Lap",
-  "dni" : "33984783",
-  "age" : 25,
-  "deleted" : false,
-  "totalSpend" : 0.0,
-  "bestAirplane" : null,
-  "flights" : [ "java.util.ArrayList", [ ] ]
-} ], [ "com.utn.person.Passenger", {
-  "password" : "1234",
-  "name" : "Gonza",
-  "lastName" : "rom",
-  "dni" : "99789654",
-  "age" : 25,
-  "deleted" : false,
-  "totalSpend" : 0.0,
-  "bestAirplane" : null,
-  "flights" : [ "java.util.ArrayList", [ ] ]
-} ], [ "com.utn.person.Passenger", {
-  "password" : "1234",
-  "name" : "prueba",
-  "lastName" : "test",
-  "dni" : "7654321",
-  "age" : 90,
-  "deleted" : false,
-  "totalSpend" : 0.0,
-  "bestAirplane" : null,
-  "flights" : null
+  "flightTickets" : [ "java.util.ArrayList", [ [ "com.utn.aerotaxi.FlightTicket", {
+    "mainPassenger" : null,
+    "departing" : [ 2020, 6, 23 ],
+    "departureCity" : "Cordoba",
+    "arrivalCity" : "Buenos Aires",
+    "numberOfPassengers" : 2,
+    "totalTicketCost" : 7000.0,
+    "status" : false,
+    "airplane" : [ "com.utn.airplanes.GoldFleet", {
+      "id" : "574e40f899",
+      "fuelCapacity" : 1000.0,
+      "costPerKM" : 261.0,
+      "maxPassengerCapacity" : 5,
+      "topSpeed" : 700.0,
+      "ePropulsionType" : "Reaction Engine",
+      "countFlights" : 0,
+      "flightFare" : 0.0,
+      "nextDepartingDate" : [ 2020, 6, 23 ],
+      "nextCity" : "Buenos Aires",
+      "wifiOnBoard" : true
+    } ]
+  } ] ] ]
 } ] ] ]

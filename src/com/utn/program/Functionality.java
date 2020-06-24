@@ -12,6 +12,7 @@ import com.utn.tools.Toolbox;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -295,7 +296,8 @@ public class Functionality {
     }
 
     private static void buyFlight(Passenger p) {
-        FlightTicket newFlightTicket = new FlightTicket(p);
+
+        FlightTicket newFlightTicket = new FlightTicket();
         boolean confirmed;
 
         ///Genero ticket
@@ -312,17 +314,21 @@ public class Functionality {
                 //Si el flight no existe lo creamos
                 flight = new Flight(newFlightTicket.getAirplane(), newFlightTicket.getDepartureCity(),
                         newFlightTicket.getArrivalCity(), newFlightTicket.getDeparting());
-                flight.addPassenger(newFlightTicket.getMainPassenger());
-
+                flight.addPassenger(p);
+                System.out.println(flight.toString());
                 //Lo agregamos a la lista de vuelos en company
                 com.addFlight(flight);
+             //   com.getFlights().add(flight);
                 //Registramos proxima fecha de salida para el avion con su proximo destino
                 newFlightTicket.getAirplane().setNextCity(newFlightTicket.getArrivalCity());
                 newFlightTicket.getAirplane().setNextDepartingDate(newFlightTicket.getDeparting());
             }
             //Agregamos ticket a Flight
             flight.addFlightTicket(newFlightTicket);
+            p.addFlight(newFlightTicket);
+
             //persistimos datos
+            JsonTools.writeJson(com.getPassengers(),JsonTools.fpassengers);
             JsonTools.writeJson(com.getFlights(), JsonTools.fflights);
             System.out.println("Vuelo registrado correctamente");
         } else {

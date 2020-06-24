@@ -43,8 +43,7 @@ public class Flight implements Serializable {
         }
     }
 
-    private int setDistance()
-    {
+    private int setDistance() {
         return ((departureCity == ECities.BSAS && arrivalCity == ECities.CBA) ||
                 (departureCity == ECities.CBA && arrivalCity == ECities.BSAS)) ? 695 :
                 ((departureCity == ECities.BSAS && arrivalCity == ECities.SANTCHILE) ||
@@ -79,7 +78,7 @@ public class Flight implements Serializable {
      * @return TRUE = flight ticket added.
      * FALSE = flight ticket doesn't added
      */
-    public boolean  addFlightTicket(FlightTicket ticket) {
+  /*  public boolean  addFlightTicket(FlightTicket ticket) {
         if (ticket == null) {
             return false;
         } else {
@@ -92,6 +91,11 @@ public class Flight implements Serializable {
                 return true;
             } else return false;
         }
+    }
+*/
+    public void addFlightTicket(FlightTicket ticket) {
+        if (ticket != null)
+            flightTickets.add(ticket);
     }
 
     public static int getCountOfPassengers() {
@@ -141,7 +145,7 @@ public class Flight implements Serializable {
         return id;
     }
 
-    public void addPassenger(Passenger toAdd){
+    public void addPassenger(Passenger toAdd) {
         this.passengers.add(toAdd);
     }
 
@@ -149,13 +153,12 @@ public class Flight implements Serializable {
     public String toString() {
         return "Flight{" +
                 "id='" + id + '\'' +
-                ", airplane=" + airplane +
+                ", airplane=" + airplane.getClass().getSimpleName() +
                 ", departureCity=" + departureCity +
                 ", arrivalCity=" + arrivalCity +
                 ", distance=" + distance +
                 ", departing=" + departing +
-                ", passengers=" + passengers +
-                Toolbox.printTicketsFlight(flightTickets, this) +
+                "," + Toolbox.printTicketsFlight(passengers, this) +
                 '}';
     }
 }
