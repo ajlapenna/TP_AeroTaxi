@@ -42,17 +42,17 @@ public class Toolbox implements Serializable {
             return "No tickets added to the fight";
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
+            for (Passenger p : passengers) {
+                int i = 1;
+                stringOfPassengers.append("[").append(i).append("] ");
+                stringOfPassengers.append("\tPassenger: ");
+                stringOfPassengers.append(p.getName() + " " + p.getLastName() + " " + p.getDni());
+                stringOfPassengers.append("\n");
+
+            }
             stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
             stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
-            for (Passenger p : passengers) {
-                    int i = 1;
-                    stringOfPassengers.append("[").append(i).append("] ");
-                    stringOfPassengers.append("\tName: ");
-                    stringOfPassengers.append(p.getName());
-                    stringOfPassengers.append("  Dni: ");
-                    stringOfPassengers.append(p.getDni());
-                    stringOfPassengers.append("\n");
-            }
+
             return "\nPassengers of the Flight " + ":\n" + stringOfPassengers.toString();
         }
     }

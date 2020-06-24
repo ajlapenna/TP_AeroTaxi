@@ -13,7 +13,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        List<Passenger> passengers = new LinkedList<>();
+
+        /*List<Passenger> passengers = new LinkedList<>();
         passengers.add(new Passenger("Agus", "Iri", "40138021", 25, "1234"));
         passengers.add(new Passenger("Agus", "Lap", "33984783", 25, "1234"));
         passengers.add(new Passenger("Gonza", "rom", "99789654", 25, "1234"));
@@ -21,7 +22,7 @@ public class Main {
 
         List<Admin> admins = new LinkedList<>();
         admins.add(new Admin("Agus", "Lapee", "38283270", 26, "1234"));
-        JsonTools.writeJson(admins, JsonTools.fadmins);
+        JsonTools.writeJson(admins, JsonTools.fadmins);*/
 
         List<Airplane> airplanes = new LinkedList<>();
         airplanes.add(new BronzeFleet());
@@ -35,12 +36,12 @@ public class Main {
         airplanes.add(new GoldFleet());
         JsonTools.writeJson(airplanes, JsonTools.fairplanes);
 
-        List<Flight> flights = new LinkedList<>();
+        /*List<Flight> flights = new LinkedList<>();
         flights.add(new Flight(airplanes.get(2), ECities.MONTVIDE, ECities.BSAS, LocalDate.now()));
         FlightTicket ticket1 = new FlightTicket(passengers.get(0), LocalDate.now(),
                 ECities.MONTVIDE, ECities.BSAS, flights.get(0).getId(), 5);
         flights.get(0).addFlightTicket(ticket1);
-        JsonTools.writeJson(flights, JsonTools.fflights);
+        JsonTools.writeJson(flights, JsonTools.fflights);*/
 
         Company com1 = new Company("AeroTaxi");
         //Functionality program = new Functionality(com1);

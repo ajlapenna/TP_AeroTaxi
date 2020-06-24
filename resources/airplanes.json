@@ -1,7 +1,7 @@
 [ "java.util.LinkedList", [ [ "com.utn.airplanes.BronzeFleet", {
-  "id" : "8eb5bd769c",
+  "id" : "0b33f9a3aa",
   "fuelCapacity" : 1200.0,
-  "costPerKM" : 200.0,
+  "costPerKM" : 226.0,
   "maxPassengerCapacity" : 10,
   "topSpeed" : 450.0,
   "ePropulsionType" : "Propeller Engine",
@@ -10,9 +10,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.BronzeFleet", {
-  "id" : "8cfb44c43b",
+  "id" : "c237e0846d",
   "fuelCapacity" : 1200.0,
-  "costPerKM" : 298.0,
+  "costPerKM" : 201.0,
   "maxPassengerCapacity" : 10,
   "topSpeed" : 450.0,
   "ePropulsionType" : "Propeller Engine",
@@ -21,9 +21,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.BronzeFleet", {
-  "id" : "cc8331610a",
+  "id" : "f1c7b6dcdf",
   "fuelCapacity" : 1200.0,
-  "costPerKM" : 194.0,
+  "costPerKM" : 284.0,
   "maxPassengerCapacity" : 10,
   "topSpeed" : 450.0,
   "ePropulsionType" : "Propeller Engine",
@@ -32,9 +32,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.SilverFleet", {
-  "id" : "fe2b6e1da0",
+  "id" : "d12dee64eb",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 168.0,
+  "costPerKM" : 262.0,
   "maxPassengerCapacity" : 7,
   "topSpeed" : 550.0,
   "ePropulsionType" : "Piston Engine",
@@ -43,9 +43,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.SilverFleet", {
-  "id" : "c03b5a54f1",
+  "id" : "46912e7002",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 249.0,
+  "costPerKM" : 227.0,
   "maxPassengerCapacity" : 7,
   "topSpeed" : 550.0,
   "ePropulsionType" : "Piston Engine",
@@ -54,9 +54,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.SilverFleet", {
-  "id" : "1f0c360b63",
+  "id" : "de6d2137e9",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 269.0,
+  "costPerKM" : 292.0,
   "maxPassengerCapacity" : 7,
   "topSpeed" : 550.0,
   "ePropulsionType" : "Piston Engine",
@@ -65,9 +65,9 @@
   "nextDepartingDate" : [ 1, 1, 1 ],
   "nextCity" : null
 } ], [ "com.utn.airplanes.GoldFleet", {
-  "id" : "fef6bd2312",
+  "id" : "a2d0e227f3",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 168.0,
+  "costPerKM" : 238.0,
   "maxPassengerCapacity" : 5,
   "topSpeed" : 700.0,
   "ePropulsionType" : "Reaction Engine",
@@ -77,9 +77,9 @@
   "nextCity" : null,
   "wifiOnBoard" : false
 } ], [ "com.utn.airplanes.GoldFleet", {
-  "id" : "36d817d12c",
+  "id" : "bbca6aaab7",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 225.0,
+  "costPerKM" : 193.0,
   "maxPassengerCapacity" : 5,
   "topSpeed" : 700.0,
   "ePropulsionType" : "Reaction Engine",
@@ -89,9 +89,9 @@
   "nextCity" : null,
   "wifiOnBoard" : true
 } ], [ "com.utn.airplanes.GoldFleet", {
-  "id" : "54b3c1b951",
+  "id" : "6d3dc25d40",
   "fuelCapacity" : 1000.0,
-  "costPerKM" : 249.0,
+  "costPerKM" : 152.0,
   "maxPassengerCapacity" : 5,
   "topSpeed" : 700.0,
   "ePropulsionType" : "Reaction Engine",

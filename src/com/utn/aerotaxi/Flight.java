@@ -24,6 +24,7 @@ public class Flight implements Serializable {
     private boolean isGone;///<!--- Despego?
 
     public Flight() {
+
     }
 
     public Flight(Airplane airplane, ECities departureCity,
@@ -37,11 +38,12 @@ public class Flight implements Serializable {
             this.distance = setDistance();
             setFlightCost();
             this.isGone = false;
+            this.passengers = new LinkedList<>();
+            this.flightTickets = new LinkedList<>();
         }
     }
 
-    private int setDistance()
-    {
+    private int setDistance() {
         return ((departureCity == ECities.BSAS && arrivalCity == ECities.CBA) ||
                 (departureCity == ECities.CBA && arrivalCity == ECities.BSAS)) ? 695 :
                 ((departureCity == ECities.BSAS && arrivalCity == ECities.SANTCHILE) ||
@@ -68,6 +70,33 @@ public class Flight implements Serializable {
         return passengers;
     }
 
+    /**
+     * Add a flight ticket if the amount of passengers from the ticket is less
+     * than the maximum capacity of the airplane. And is the capacity is full the Flight is gone.
+     *
+     * @param ticket = Current ticket
+     * @return TRUE = flight ticket added.
+     * FALSE = flight ticket doesn't added
+     */
+  /*  public boolean  addFlightTicket(FlightTicket ticket) {
+        if (ticket == null) {
+            return false;
+        } else {
+            if (ticket.getNumberOfPassengers() + countOfPassengers <= airplane.getMaxPassengerCapacity()) {
+                flightTickets.add(ticket);
+                passengers.add(ticket.getMainPassenger());
+                countOfPassengers += ticket.getNumberOfPassengers();
+                if (countOfPassengers == airplane.getMaxPassengerCapacity())
+                    this.isGone = true;
+                return true;
+            } else return false;
+        }
+    }
+*/
+    public void addFlightTicket(FlightTicket ticket) {
+        if (ticket != null)
+            flightTickets.add(ticket);
+    }
 
     public static int getCountOfPassengers() {
         return countOfPassengers;
@@ -83,10 +112,6 @@ public class Flight implements Serializable {
 
     public void setFlightTickets(LinkedList<FlightTicket> flightTickets) {
         this.flightTickets = flightTickets;
-    }
-
-    public void addFlightTicket(FlightTicket newFlightTicket){
-        flightTickets.add(newFlightTicket);
     }
 
     public boolean isGone() {
@@ -132,7 +157,7 @@ public class Flight implements Serializable {
         return id;
     }
 
-    public void addPassenger(Passenger toAdd){
+    public void addPassenger(Passenger toAdd) {
         this.passengers.add(toAdd);
     }
 
@@ -140,12 +165,12 @@ public class Flight implements Serializable {
     public String toString() {
         return "Flight{" +
                 "id='" + id + '\'' +
-                ", airplane=" + airplane +
+                ", airplane=" + airplane.getClass().getSimpleName() +
                 ", departureCity=" + departureCity +
                 ", arrivalCity=" + arrivalCity +
                 ", distance=" + distance +
                 ", departing=" + departing +
-                Toolbox.printTicketsFlight(passengers, this) +
+                ", " + Toolbox.printTicketsFlight(passengers, this) +
                 '}';
     }
 }
