@@ -46,12 +46,13 @@ public class Toolbox implements Serializable {
                 int i = 1;
                 stringOfPassengers.append("[").append(i).append("] ");
                 stringOfPassengers.append("\tPassenger: ");
-                stringOfPassengers.append(p.getName() + p.getLastName() + p.getDni());
+                stringOfPassengers.append(p.getName() + " " + p.getLastName() + " " + p.getDni());
                 stringOfPassengers.append("\n");
 
             }
             stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
             stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
+
             return "\nPassengers of the Flight " + ":\n" + stringOfPassengers.toString();
         }
     }

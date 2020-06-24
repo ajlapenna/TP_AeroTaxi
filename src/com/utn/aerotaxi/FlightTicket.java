@@ -21,17 +21,17 @@ public class FlightTicket implements Serializable {
     public FlightTicket() {
     }
 
-    /*public FlightTicket(Passenger passenger){
-        this.mainPassenger = passenger;
+    public FlightTicket(Passenger passenger){
+        this.mainPassenger = passenger.getName() + passenger.getDni();
         this.totalTicketCost = 0;
         this.numberOfPassengers = 0;
         this.arrivalCity = null;
         this.departureCity = null;
-    }*/
+    }
 
     public FlightTicket(Passenger mainPassenger, LocalDate departing, ECities departureCity,
                         ECities arrivalCity, String flightID, int numberOfPassengers) {
-        this.mainPassenger = mainPassenger.getDni() + mainPassenger.getName();
+        this.mainPassenger =  mainPassenger.getName() + mainPassenger.getDni();
         this.departing = departing;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;

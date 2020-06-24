@@ -63,7 +63,6 @@ public class Passenger extends Person {
             flightTickets.add(f);
     }
 
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

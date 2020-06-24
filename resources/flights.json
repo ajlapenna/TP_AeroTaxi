@@ -1,22 +1,21 @@
 [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.Flight", {
-  "airplane" : [ "com.utn.airplanes.GoldFleet", {
-    "id" : "574e40f899",
-    "fuelCapacity" : 1000.0,
-    "costPerKM" : 261.0,
-    "maxPassengerCapacity" : 5,
-    "topSpeed" : 700.0,
-    "ePropulsionType" : "Reaction Engine",
+  "airplane" : [ "com.utn.airplanes.BronzeFleet", {
+    "id" : "16038c5239",
+    "fuelCapacity" : 1200.0,
+    "costPerKM" : 206.0,
+    "maxPassengerCapacity" : 10,
+    "topSpeed" : 450.0,
+    "ePropulsionType" : "Propeller Engine",
     "countFlights" : 0,
     "flightFare" : 0.0,
-    "nextDepartingDate" : [ 2020, 6, 23 ],
-    "nextCity" : "Buenos Aires",
-    "wifiOnBoard" : true
+    "nextDepartingDate" : [ 2020, 6, 26 ],
+    "nextCity" : "Buenos Aires"
   } ],
-  "id" : "491477ad8a",
+  "id" : "7a49457272",
   "departureCity" : "Cordoba",
   "arrivalCity" : "Buenos Aires",
   "distance" : 695,
-  "departing" : [ 2020, 6, 23 ],
+  "departing" : [ 2020, 6, 26 ],
   "passengers" : [ "java.util.LinkedList", [ [ "com.utn.person.Passenger", {
     "password" : "1234",
     "name" : "Agus",
@@ -47,30 +46,49 @@
         "nextCity" : "Buenos Aires",
         "wifiOnBoard" : true
       } ]
+    } ], [ "com.utn.aerotaxi.FlightTicket", {
+      "mainPassenger" : null,
+      "departing" : [ 2020, 6, 26 ],
+      "departureCity" : "Cordoba",
+      "arrivalCity" : "Buenos Aires",
+      "numberOfPassengers" : 3,
+      "totalTicketCost" : 10500.0,
+      "status" : false,
+      "airplane" : [ "com.utn.airplanes.BronzeFleet", {
+        "id" : "16038c5239",
+        "fuelCapacity" : 1200.0,
+        "costPerKM" : 206.0,
+        "maxPassengerCapacity" : 10,
+        "topSpeed" : 450.0,
+        "ePropulsionType" : "Propeller Engine",
+        "countFlights" : 0,
+        "flightFare" : 0.0,
+        "nextDepartingDate" : [ 2020, 6, 26 ],
+        "nextCity" : "Buenos Aires"
+      } ]
     } ] ] ]
   } ] ] ],
   "flightTickets" : [ "java.util.LinkedList", [ [ "com.utn.aerotaxi.FlightTicket", {
     "mainPassenger" : null,
-    "departing" : [ 2020, 6, 23 ],
+    "departing" : [ 2020, 6, 26 ],
     "departureCity" : "Cordoba",
     "arrivalCity" : "Buenos Aires",
-    "numberOfPassengers" : 2,
-    "totalTicketCost" : 7000.0,
+    "numberOfPassengers" : 3,
+    "totalTicketCost" : 10500.0,
     "status" : false,
-    "airplane" : [ "com.utn.airplanes.GoldFleet", {
-      "id" : "574e40f899",
-      "fuelCapacity" : 1000.0,
-      "costPerKM" : 261.0,
-      "maxPassengerCapacity" : 5,
-      "topSpeed" : 700.0,
-      "ePropulsionType" : "Reaction Engine",
+    "airplane" : [ "com.utn.airplanes.BronzeFleet", {
+      "id" : "16038c5239",
+      "fuelCapacity" : 1200.0,
+      "costPerKM" : 206.0,
+      "maxPassengerCapacity" : 10,
+      "topSpeed" : 450.0,
+      "ePropulsionType" : "Propeller Engine",
       "countFlights" : 0,
       "flightFare" : 0.0,
-      "nextDepartingDate" : [ 2020, 6, 23 ],
-      "nextCity" : "Buenos Aires",
-      "wifiOnBoard" : true
+      "nextDepartingDate" : [ 2020, 6, 26 ],
+      "nextCity" : "Buenos Aires"
     } ]
   } ] ] ],
-  "flightCost" : 181395.0,
+  "flightCost" : 143170.0,
   "gone" : false
 } ] ] ]

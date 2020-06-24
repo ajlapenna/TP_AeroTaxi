@@ -28,5 +28,25 @@
       "nextCity" : "Buenos Aires",
       "wifiOnBoard" : true
     } ]
+  } ], [ "com.utn.aerotaxi.FlightTicket", {
+    "mainPassenger" : null,
+    "departing" : [ 2020, 6, 26 ],
+    "departureCity" : "Cordoba",
+    "arrivalCity" : "Buenos Aires",
+    "numberOfPassengers" : 3,
+    "totalTicketCost" : 10500.0,
+    "status" : false,
+    "airplane" : [ "com.utn.airplanes.BronzeFleet", {
+      "id" : "16038c5239",
+      "fuelCapacity" : 1200.0,
+      "costPerKM" : 206.0,
+      "maxPassengerCapacity" : 10,
+      "topSpeed" : 450.0,
+      "ePropulsionType" : "Propeller Engine",
+      "countFlights" : 0,
+      "flightFare" : 0.0,
+      "nextDepartingDate" : [ 2020, 6, 26 ],
+      "nextCity" : "Buenos Aires"
+    } ]
   } ] ] ]
 } ] ] ]

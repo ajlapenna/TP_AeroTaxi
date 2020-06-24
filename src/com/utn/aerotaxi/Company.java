@@ -150,6 +150,25 @@ public class Company {
         return flightOftheDay.toString();
     }
 
+    /*public boolean showAvailableAirplanes(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+        boolean flag = false;// Esta bandera se utiliza para saber si aunquesea se muestra un avion, caso contrario imprime mensaje
+        for (Airplane a : airplanes) {
+            //Primero que nada evalúo la capacidad del avion
+            if (a.getMaxPassengerCapacity() >= countOfPassengers) {
+                //Si su proximo vuelo se realiza otro día, lo muestro
+                if (!a.getNextDepartingDate().isEqual(departingDate)) {
+                    System.out.println(a.toString());
+                    flag = true;
+                    // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+                } else if (a.getNextCity() == departureCity) {
+                    //Si es distanta no lo mostramos, ya que cada avion solo puede hacer un destino por dia
+                    System.out.println(a);
+                    flag = true;
+                }
+            }
+        }
+    }*/
+
     public boolean showAvailableAirplanes(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
         boolean flag = false;// Esta bandera se utiliza para saber si aunquesea se muestra un avion, caso contrario imprime mensaje
         for (Airplane a : airplanes) {

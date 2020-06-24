@@ -102,6 +102,18 @@ public class Flight implements Serializable {
         return countOfPassengers;
     }
 
+    public void setGone(boolean gone) {
+        isGone = gone;
+    }
+
+    public void setPassengers(LinkedList<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    public void setFlightTickets(LinkedList<FlightTicket> flightTickets) {
+        this.flightTickets = flightTickets;
+    }
+
     public boolean isGone() {
         return isGone;
     }
@@ -158,7 +170,7 @@ public class Flight implements Serializable {
                 ", arrivalCity=" + arrivalCity +
                 ", distance=" + distance +
                 ", departing=" + departing +
-                "," + Toolbox.printTicketsFlight(passengers, this) +
+                ", " + Toolbox.printTicketsFlight(passengers, this) +
                 '}';
     }
 }
