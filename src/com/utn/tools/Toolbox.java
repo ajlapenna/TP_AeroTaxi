@@ -34,26 +34,24 @@ public class Toolbox implements Serializable {
     }
 
     ///Print all the passengers
-    public static String printTicketsFlight(List<FlightTicket> flightTickets, Flight flight) {
+    public static String printTicketsFlight(List<Passenger> passengers, Flight flight) {
         if (flight == null) return "E R R O R Flight not exist.";
-        if (flightTickets == null) {
+        if (passengers == null) {
             return "E R R O R Ticket not exist.";
-        } else if (flightTickets.isEmpty()) {
+        } else if (passengers.isEmpty()) {
             return "No tickets added to the fight";
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
             stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
             stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
-            for (FlightTicket ticket : flightTickets) {
-                if (ticket.isStatus()) {
+            for (Passenger p : passengers) {
                     int i = 1;
                     stringOfPassengers.append("[").append(i).append("] ");
                     stringOfPassengers.append("\tName: ");
-                    stringOfPassengers.append(ticket.getMainPassenger().getName());
+                    stringOfPassengers.append(p.getName());
                     stringOfPassengers.append("  Dni: ");
-                    stringOfPassengers.append(ticket.getMainPassenger().getDni());
+                    stringOfPassengers.append(p.getDni());
                     stringOfPassengers.append("\n");
-                }
             }
             return "\nPassengers of the Flight " + ":\n" + stringOfPassengers.toString();
         }

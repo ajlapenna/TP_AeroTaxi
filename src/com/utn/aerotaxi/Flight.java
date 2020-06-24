@@ -68,31 +68,25 @@ public class Flight implements Serializable {
         return passengers;
     }
 
-    /**
-     * Add a flight ticket if the amount of passengers from the ticket is less
-     * than the maximum capacity of the airplane. And is the capacity is full the Flight is gone.
-     *
-     * @param ticket = Current ticket
-     * @return TRUE = flight ticket added.
-     * FALSE = flight ticket doesn't added
-     */
-    public boolean  addFlightTicket(FlightTicket ticket) {
-        if (ticket == null) {
-            return false;
-        } else {
-            if (ticket.getNumberOfPassengers() + countOfPassengers <= airplane.getMaxPassengerCapacity()) {
-                flightTickets.add(ticket);
-                passengers.add(ticket.getMainPassenger());
-                countOfPassengers += ticket.getNumberOfPassengers();
-                if (countOfPassengers == airplane.getMaxPassengerCapacity())
-                    this.isGone = true;
-                return true;
-            } else return false;
-        }
-    }
 
     public static int getCountOfPassengers() {
         return countOfPassengers;
+    }
+
+    public void setGone(boolean gone) {
+        isGone = gone;
+    }
+
+    public void setPassengers(LinkedList<Passenger> passengers) {
+        this.passengers = passengers;
+    }
+
+    public void setFlightTickets(LinkedList<FlightTicket> flightTickets) {
+        this.flightTickets = flightTickets;
+    }
+
+    public void addFlightTicket(FlightTicket newFlightTicket){
+        flightTickets.add(newFlightTicket);
     }
 
     public boolean isGone() {
@@ -151,8 +145,7 @@ public class Flight implements Serializable {
                 ", arrivalCity=" + arrivalCity +
                 ", distance=" + distance +
                 ", departing=" + departing +
-                ", passengers=" + passengers +
-                Toolbox.printTicketsFlight(flightTickets, this) +
+                Toolbox.printTicketsFlight(passengers, this) +
                 '}';
     }
 }

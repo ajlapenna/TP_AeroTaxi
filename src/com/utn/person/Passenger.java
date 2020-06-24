@@ -51,6 +51,10 @@ public class Passenger extends Person {
         return flights;
     }
 
+    public void addFlight(Flight flight){
+        flights.add(flight);
+    }
+
     public void setFlights(ArrayList<Flight> flights) {
         this.flights = flights;
     }

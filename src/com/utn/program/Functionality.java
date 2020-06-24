@@ -28,7 +28,7 @@ public class Functionality {
     }
 
     public Functionality(Company company) {
-        this.com = company;
+        com = company;
     }
 
     public static void startupMenu() {
@@ -286,7 +286,7 @@ public class Functionality {
     }
 
     private static void buyFlight(Passenger p) {
-        FlightTicket newFlightTicket = new FlightTicket(p);
+        FlightTicket newFlightTicket = new FlightTicket();
         boolean confirmed;
 
         ///Genero ticket
@@ -303,13 +303,17 @@ public class Functionality {
                 //Si el flight no existe lo creamos
                 flight = new Flight(newFlightTicket.getAirplane(), newFlightTicket.getDepartureCity(),
                         newFlightTicket.getArrivalCity(), newFlightTicket.getDeparting());
-                flight.addPassenger(newFlightTicket.getMainPassenger());
+                flight.addPassenger(p);
+                com.getFlights().add(flight);
                 //Registramos proxima fecha de salida para el avion con su proximo destino
                 newFlightTicket.getAirplane().setNextCity(newFlightTicket.getArrivalCity());
                 newFlightTicket.getAirplane().setNextDepartingDate(newFlightTicket.getDeparting());
+                JsonTools.writeJson(com.getFlights(), JsonTools.fflights);
             }
             //Agregamos ticket a Flight
             flight.addFlightTicket(newFlightTicket);
+            p.addFlight(flight);
+            JsonTools.writeJson(com.getPassengers(), JsonTools.fpassengers);
             JsonTools.writeJson(com.getFlights(), JsonTools.fflights);
             System.out.println("Vuelo registrado correctamente");
         } else {
@@ -388,7 +392,7 @@ public class Functionality {
         return rta;
     }
 
-    private static double insertTicketCost(FlightTicket newTicket, int numberOfPassengers, ECities departureCity, LocalDate departingDate, int distance) {
+    /*private static double insertTicketCost(FlightTicket newTicket, int numberOfPassengers, ECities departureCity, LocalDate departingDate, int distance) {
 
         double ticketCost = 0;
         try {
@@ -408,5 +412,32 @@ public class Functionality {
             System.out.println("El id ingresado es inválido");
         }
         return ticketCost;
+    }*/
+
+    private static double insertTicketCost(FlightTicket newTicket, int numberOfPassengers, ECities departureCity, LocalDate departingDate, int distance) {
+
+        double ticketCost = 0;
+        try {
+            if (com.showAvailableAirplanes(numberOfPassengers, departureCity, departingDate)) {
+                System.out.println("Por favor, seleccione el ID del avion en el que desea viajar");
+                String id = scan.nextLine();
+                ///Corroboramos que exista el avion
+                if (com.existAirplane(id)) {
+                    ///Calculamos el costo
+                    ticketCost = com.calculateTicketCostForAirplanId(id, numberOfPassengers, distance);
+                    ///Guardamos el avion en el ticket
+                    newTicket.setAirplane(com.searchAirplaneForId(id));
+                } else {
+                    System.out.println("El avion ingresado no existe");
+                }
+            } else {
+                System.out.println("No tenemos aviones disponibles con esa capacidad de pasajeros");
+                ticketCost = -1;
+            }
+        } catch (InputMismatchException e) {
+            System.out.println("El id ingresado es inválido");
+        }
+        return ticketCost;
     }
 }
+
