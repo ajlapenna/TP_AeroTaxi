@@ -3,6 +3,7 @@ package com.utn.aerotaxi;
 import com.utn.airplanes.Airplane;
 import com.utn.enums.ECities;
 import com.utn.person.Passenger;
+import com.utn.tools.Toolbox;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -19,6 +20,8 @@ public class FlightTicket implements Serializable {
     private Airplane airplane;
 
     public FlightTicket() {
+        this.flightID = Toolbox.setId();
+        status = true;
     }
 
     public FlightTicket(Passenger passenger){
@@ -27,16 +30,18 @@ public class FlightTicket implements Serializable {
         this.numberOfPassengers = 0;
         this.arrivalCity = null;
         this.departureCity = null;
+        this.flightID = Toolbox.setId();
+        status = true;
     }
 
     public FlightTicket(Passenger mainPassenger, LocalDate departing, ECities departureCity,
-                        ECities arrivalCity, String flightID, int numberOfPassengers) {
+                        ECities arrivalCity, int numberOfPassengers) {
         this.mainPassenger =  mainPassenger.getName() + mainPassenger.getDni();
         this.departing = departing;
         this.departureCity = departureCity;
         this.arrivalCity = arrivalCity;
         this.numberOfPassengers = numberOfPassengers;
-        this.flightID = flightID;
+        this.flightID = Toolbox.setId();
         this.status = true;
     }
 
@@ -84,7 +89,7 @@ public class FlightTicket implements Serializable {
         return mainPassenger;
     }
 
-    public String flightID() {
+    public String getFlightID() {
         return flightID;
     }
 
@@ -100,8 +105,12 @@ public class FlightTicket implements Serializable {
         else return this.status = today.datesUntil(departing).count() > 1;
     }
 
-    public boolean isStatus() {
+    public boolean getStatus() {
         return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
     }
 
     public LocalDate getDeparting() {
@@ -117,15 +126,31 @@ public class FlightTicket implements Serializable {
 
     }
 
+//    @Override
+//    public String toString() {
+//        return "FlightTicket{" +
+//                "flightID=" + flightID +
+//                ", departing=" + departing +
+//                ", departureCity=" + departureCity +
+//                ", arrivalCity=" + arrivalCity +
+//                ", numberOfPassengers=" + numberOfPassengers +
+//                ", totalTicketCost=" + totalTicketCost +
+//                '}';
+//    }
+
+
     @Override
     public String toString() {
         return "FlightTicket{" +
-                "flightID=" + flightID +
+                "flightID='" + flightID + '\'' +
+                ", mainPassenger='" + mainPassenger + '\'' +
                 ", departing=" + departing +
                 ", departureCity=" + departureCity +
                 ", arrivalCity=" + arrivalCity +
                 ", numberOfPassengers=" + numberOfPassengers +
                 ", totalTicketCost=" + totalTicketCost +
+                ", status=" + status +
+                ", airplane=" + airplane +
                 '}';
     }
 }

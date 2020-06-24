@@ -12,7 +12,6 @@ import com.utn.tools.Toolbox;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
@@ -164,13 +163,47 @@ public class Functionality {
 
     private static void menuPassenger(Passenger p) {
         //TODO
-        System.out.println("1. Contratar un nuevo vuelo");
-        System.out.println("2. Cancelar un vuelo");
-        System.out.print("\nOpción: ");
-        int option = scan.nextInt();
+        int flag = 0, option = 0;
+        try {
+            do {
+                System.out.println("1. Contratar un nuevo vuelo");
+                System.out.println("2. Cancelar un vuelo");
+                System.out.print("\nOpción: ");
+                option = scan.nextInt();
 
-        if (option == 1) {
-            buyFlight(p);
+                switch (option) {
+                    case 1:
+                        buyFlight(p);
+                        break;
+
+                    case 2:
+                        String toDelete;
+                        if (p.showAllFlightTickets().length() != 0) {
+                            System.out.println(p.showAllFlightTickets());
+                            System.out.print("Ingrese el ID del vuelo a cancelar: ");
+                            scan.nextLine();
+                            toDelete = scan.nextLine();
+                            FlightTicket ft = p.searchTicketForId(toDelete);
+                            if (p.unsuscribeTicket(ft))
+                                ft.setStatus(false);
+                        } else {
+                            System.out.println("No posee vuelos activos o no se pueden cancelar.");
+                        }
+                        //com.unsuscribeFlight(p.searchTicketForId(toDelete));
+                        //Flight f = com.searchFlightForId(toDelete);
+                        break;
+
+                    case 0:
+                        flag = 1;
+                        startupMenu();
+                        break;
+                    default:
+                        throw new IllegalStateException("Unexpected value: " + option);
+                }
+            } while (flag == 0);
+        } catch (InputMismatchException ex) {
+            System.out.println("Debes insertar un número");
+            option = scan.nextInt();
         }
     }
 
@@ -273,13 +306,13 @@ public class Functionality {
         }
         ///Al tener precio calculado, preguntamos si desea confirmar su vuelo
         if (newFlightTicket.getTotalTicketCost() != -1) {
-            if (confirmedflight(newFlightTicket) == 1)
+            if (confirmedFlight(newFlightTicket) == 1)
                  confirmed = true;
         }
         return confirmed;
     }
 
-    private static int confirmedflight(FlightTicket newFlightTicket) {
+    private static int confirmedFlight(FlightTicket newFlightTicket) {
         int rta = 0;
 
         try {

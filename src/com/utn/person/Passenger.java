@@ -6,6 +6,7 @@ import com.utn.airplanes.BronzeFleet;
 import com.utn.airplanes.GoldFleet;
 import com.utn.airplanes.SilverFleet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,6 +25,25 @@ public class Passenger extends Person {
         flightTickets = new ArrayList<>();
     }
 
+    public boolean unsuscribeTicket(FlightTicket ft) {
+        if (LocalDate.now().isBefore(ft.getDeparting().plusDays(-1))) {
+            return true;
+        } else {
+            System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
+        }
+        return false;
+    }
+
+    public String showAllFlightTickets() {
+        StringBuilder showTickets = new StringBuilder();
+        for (FlightTicket currentTicket : flightTickets) {
+            if (currentTicket.getStatus()) {
+                showTickets.append(currentTicket.toString());
+                showTickets.append("\n");
+            }
+        }
+        return showTickets.toString();
+    }
 
     public double getTotalSpend() {
         return totalSpend;
@@ -61,6 +81,15 @@ public class Passenger extends Person {
     public void addFlight(FlightTicket f) {
         if (f != null)
             flightTickets.add(f);
+    }
+
+    public FlightTicket searchTicketForId(String id) {
+        FlightTicket toSearch = null;
+        for (FlightTicket ft : flightTickets) {
+            if (id.compareToIgnoreCase(ft.getFlightID()) == 0)
+                toSearch = ft;
+        }
+        return toSearch;
     }
 
     @Override

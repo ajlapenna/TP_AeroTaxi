@@ -31,7 +31,8 @@ public class Company {
 
     ///Comparo la fecha de este momento con la del vuelo -1 día,
     ///ya que no se podran cancelar con menos de 24hs de antelacion
-    public boolean unsuscribeFlight(Passenger p, Flight flight) {
+
+    public static boolean unsuscribeFlight(Passenger p, Flight flight) {
         boolean deleted = false;
         if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
             deleted = flight.deletePassenger(p);
@@ -223,6 +224,15 @@ public class Company {
         for (Airplane a : airplanes) {
             if (id.compareToIgnoreCase(a.getId()) == 0)
                 toSearch = a;
+        }
+        return toSearch;
+    }
+
+    public Flight searchFlightForId(String id) {
+        Flight toSearch = null;
+        for (Flight f : flights) {
+            if (id.compareToIgnoreCase(f.getId()) == 0)
+                toSearch = f;
         }
         return toSearch;
     }
