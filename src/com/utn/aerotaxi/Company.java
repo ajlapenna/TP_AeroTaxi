@@ -31,7 +31,8 @@ public class Company {
 
     ///Comparo la fecha de este momento con la del vuelo -1 día,
     ///ya que no se podran cancelar con menos de 24hs de antelacion
-    public boolean unsuscribeFlight(Passenger p, Flight flight) {
+
+    public static boolean unsuscribeFlight(Passenger p, Flight flight) {
         boolean deleted = false;
         if (LocalDate.now().isBefore(flight.getDeparting().plusDays(-1))) {
             deleted = flight.deletePassenger(p);
@@ -41,9 +42,9 @@ public class Company {
         return deleted;
     }
 
-    public boolean existsPassenger(String dni){
+    public boolean existsPassenger(String dni) {
         for (Passenger p : passengers) {
-            if(p.getDni().compareToIgnoreCase(dni) == 0)
+            if (p.getDni().compareToIgnoreCase(dni) == 0)
                 return true;
         }
         return false;
@@ -89,6 +90,11 @@ public class Company {
             airplanes = JsonTools.readJson(JsonTools.fairplanes, Airplane.class);
     }
 
+    public void addFlight(Flight toAdd) {
+        if (toAdd != null)
+            flights.add(toAdd);
+    }
+
     public LinkedList<Passenger> getPassengers() {
         return new LinkedList<>(passengers);
     }
@@ -102,7 +108,7 @@ public class Company {
     }
 
     public void addUser(Person user) {
-        if(user != null){
+        if (user != null) {
             if (user instanceof Passenger) {
                 passengers.add((Passenger) user);
                 JsonTools.writeJson(passengers, JsonTools.fpassengers);
@@ -123,29 +129,74 @@ public class Company {
 
     public Flight searchFlightForAirplaneAndDate(Airplane a, LocalDate departingDate) {
         Flight flightToSearch = null;
-        for (Flight f : flights) {
-            if (f.getAirplane().equals(a) == true && departingDate.isEqual(f.getDeparting()) == true) {
-                flightToSearch = f;
+        if (flights != null) {
+            for (Flight f : flights) {
+                if (f.getAirplane().equals(a) && departingDate.isEqual(f.getDeparting())) {
+                    flightToSearch = f;
+                }
             }
         }
         return flightToSearch;
     }
 
-    public void showAvaibleFlights(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+    public String showAllFlightsByDay(LocalDate departingDate) {
+        StringBuilder flightOftheDay = new StringBuilder();
 
+        for (Flight f : flights) {
+            if (departingDate.isEqual(f.getDeparting())) {
+                flightOftheDay.append(f.toString());
+                flightOftheDay.append("\n");
+            }
+        }
+        return flightOftheDay.toString();
+    }
+
+    /*public boolean showAvailableAirplanes(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+        boolean flag = false;// Esta bandera se utiliza para saber si aunquesea se muestra un avion, caso contrario imprime mensaje
         for (Airplane a : airplanes) {
-            //Si su proximo vuelo se realiza otro día, lo muestro
-            if (!a.getNextDepartingDate().isEqual(departingDate)) {
-                System.out.println(a.toString());
-                // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
-            } else if (a.getNextCity() == departureCity) {
-                //Si es distanta no la buscamos, ya que cada avion solo puede hacer un destino por dia
-                //Si es igual,buscamos el flight registrado en la lista y comprobamos que su capacidad sea suficiente
-                if (searchFlightForAirplaneAndDate(a, departingDate).getPassengers().size() <= countOfPassengers) {
+            //Primero que nada evalúo la capacidad del avion
+            if (a.getMaxPassengerCapacity() >= countOfPassengers) {
+                //Si su proximo vuelo se realiza otro día, lo muestro
+                if (!a.getNextDepartingDate().isEqual(departingDate)) {
+                    System.out.println(a.toString());
+                    flag = true;
+                    // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+                } else if (a.getNextCity() == departureCity) {
+                    //Si es distanta no lo mostramos, ya que cada avion solo puede hacer un destino por dia
                     System.out.println(a);
+                    flag = true;
                 }
             }
         }
+    }*/
+
+    public boolean showAvailableAirplanes(int countOfPassengers, ECities departureCity, LocalDate departingDate) {
+        boolean flag = false;// Esta bandera se utiliza para saber si aunquesea se muestra un avion, caso contrario imprime mensaje
+        for (Airplane a : airplanes) {
+            //Primero que nada evalúo la capacidad del avion
+            if (a.getMaxPassengerCapacity() >= countOfPassengers) {
+                //Si su proximo vuelo se realiza otro día, lo muestro
+                if (!a.getNextDepartingDate().isEqual(departingDate)) {
+                    System.out.println(a.toString());
+                    flag = true;
+                    // Si su proximo vuelo es el mismo dia, evaluamos la ciudad de destino
+                } else if (a.getNextCity() == departureCity) {
+                    //Si es distanta no lo mostramos, ya que cada avion solo puede hacer un destino por dia
+                    System.out.println(a);
+                    flag = true;
+                }
+            }
+        }
+        return flag;
+    }
+
+    public String showAllFlights() {
+        StringBuilder showFlights = new StringBuilder();
+        for (Flight currentFlight : flights) {
+            showFlights.append(currentFlight.toString());
+            showFlights.append("\n");
+        }
+        return showFlights.toString();
     }
 
     public boolean existAirplane(String id) {
@@ -175,5 +226,29 @@ public class Company {
                 toSearch = a;
         }
         return toSearch;
+    }
+
+    public Flight searchFlightForId(String id) {
+        Flight toSearch = null;
+        for (Flight f : flights) {
+            if (id.compareToIgnoreCase(f.getId()) == 0)
+                toSearch = f;
+        }
+        return toSearch;
+    }
+
+    public String showAllPassengers() {
+        if (passengers.isEmpty()) return "E R R O R empty list of passengers";
+        else {
+            StringBuilder stringPassengers = new StringBuilder();
+            for (int i = 0; i < passengers.size(); i++) {
+                Passenger passenger = passengers.get(i);
+                stringPassengers.append(i);
+                stringPassengers.append(" ");
+                stringPassengers.append(passenger.toString());
+                stringPassengers.append("\n");
+            }
+            return stringPassengers.toString();
+        }
     }
 }

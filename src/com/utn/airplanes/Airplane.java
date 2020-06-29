@@ -10,7 +10,7 @@ import java.time.LocalDate;
 public abstract class Airplane implements Serializable {
     private String id;
     private double fuelCapacity;
-    private double costPerKM = Toolbox.costRandom(); //Random 150 to 300
+    private double costPerKM; //Random 150 to 300
     private int maxPassengerCapacity;
     private double topSpeed;
     private EPropulsionType ePropulsionType;
@@ -22,10 +22,10 @@ public abstract class Airplane implements Serializable {
     public Airplane() {
     }
 
-    public Airplane(double fuelCapacity, int maxPassengerCapacity,
-                    double topSpeed, EPropulsionType ePropulsionType) {
+    public Airplane(double fuelCapacity, int maxPassengerCapacity, double topSpeed, EPropulsionType ePropulsionType, int flightFare) {
         this.id = Toolbox.setId();
         this.fuelCapacity = fuelCapacity;
+        this.costPerKM = Toolbox.costRandom();
         this.maxPassengerCapacity = maxPassengerCapacity;
         this.topSpeed = topSpeed;
         this.ePropulsionType = ePropulsionType;

@@ -1,21 +1,95 @@
 package com.utn.person;
 
 import com.utn.aerotaxi.Flight;
+import com.utn.aerotaxi.FlightTicket;
+import com.utn.airplanes.BronzeFleet;
+import com.utn.airplanes.GoldFleet;
+import com.utn.airplanes.SilverFleet;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Objects;
 
 public class Passenger extends Person {
     private double totalSpend;
     private String bestAirplane;
-    private ArrayList<Flight> flights;
+    private ArrayList<FlightTicket> flightTickets = new ArrayList<>();
 
-    public Passenger() {}
+    public Passenger() {
+    }
+
     public Passenger(String name, String lastName, String dni, int age, String password) {
         super(name, lastName, dni, age, password);
         totalSpend = 0;
         bestAirplane = null;
-        flights = new ArrayList<>();
+        flightTickets = new ArrayList<>();
+    }
+
+    public boolean unsuscribeTicket(FlightTicket ft) {
+        if (LocalDate.now().isBefore(ft.getDeparting().plusDays(-1))) {
+            return true;
+        } else {
+            System.out.println("Debe cancelarse con al menos 24 horas de anticipación");
+        }
+        return false;
+    }
+
+    public String showAllFlightTickets() {
+        StringBuilder showTickets = new StringBuilder();
+        for (FlightTicket currentTicket : flightTickets) {
+            if (currentTicket.getStatus()) {
+                showTickets.append(currentTicket.toString());
+                showTickets.append("\n");
+            }
+        }
+        return showTickets.toString();
+    }
+
+    public double getTotalSpend() {
+        return totalSpend;
+    }
+
+    public void setTotalSpend(double totalSpend) {
+        this.totalSpend = totalSpend;
+    }
+
+    public String getBestAirplane() {
+        return bestAirplane;
+    }
+
+    public void setBestAirplane() {
+        if (!flightTickets.isEmpty()) {
+            for (FlightTicket f : flightTickets) {
+                if (f.getAirplane() instanceof BronzeFleet)
+                    bestAirplane = "Bronze";
+                else if (f.getAirplane() instanceof SilverFleet)
+                    bestAirplane = "Silver";
+                else if (f.getAirplane() instanceof GoldFleet)
+                    bestAirplane = "Gold";
+            }
+        }
+    }
+
+    public ArrayList<FlightTicket> getFlightTickets() {
+        return flightTickets;
+    }
+
+    public void setFlightTickets(ArrayList<FlightTicket> flightTickets) {
+        this.flightTickets = flightTickets;
+    }
+
+    public void addFlight(FlightTicket f) {
+        if (f != null)
+            flightTickets.add(f);
+    }
+
+    public FlightTicket searchTicketForId(String id) {
+        FlightTicket toSearch = null;
+        for (FlightTicket ft : flightTickets) {
+            if (id.compareToIgnoreCase(ft.getFlightID()) == 0)
+                toSearch = ft;
+        }
+        return toSearch;
     }
 
     @Override
@@ -33,27 +107,11 @@ public class Passenger extends Person {
         return Objects.hash(getDni(), getLastName(), getName());
     }
 
-    public double getTotalSpend() {
-        return totalSpend;
-    }
-
-    public void setTotalSpend(double totalSpend) {
-        this.totalSpend = totalSpend;
-    }
-
-    public String getBestAirplane() {
-        return bestAirplane;
-    }
-
-    public void setBestAirplane(String bestAirplane) {
-        this.bestAirplane = bestAirplane;
-    }
-
-    public ArrayList<Flight> getFlights() {
-        return flights;
-    }
-
-    public void setFlights(ArrayList<Flight> flights) {
-        this.flights = flights;
+    @Override
+    public String toString() {
+        return super.toString() +
+                " totalSpend=" + totalSpend +
+                ", bestAirplane='" + bestAirplane + '\'' +
+                ", flights=" + flightTickets;
     }
 }

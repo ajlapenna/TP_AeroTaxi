@@ -54,6 +54,6 @@ public abstract class Person implements Serializable {
 
     @Override
     public String toString() {
-        return name + ", last name='" + lastName + '\'' +", dni='" + dni + '\'' +", age=" + age ;
+        return "Name:"+name + ", Apellido:'" + lastName + '\'' +", DNI:'" + dni + '\'' +", Edad:" + age ;
     }
 }

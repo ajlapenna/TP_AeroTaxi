@@ -10,7 +10,8 @@ import java.util.List;
 import java.util.UUID;
 
 public class Toolbox implements Serializable {
-    Toolbox() {}
+    Toolbox() {
+    }
 
     /**
      * Get a random UUID , transform it to String,
@@ -29,42 +30,49 @@ public class Toolbox implements Serializable {
      * @return {@link Double} = value from 150 to 300 with only 2 decimals
      */
     public static double costRandom() {
-        return Math.round(Math.random() * (150 - 300 + 1) + 300 * 100d) / 100d;
+        return Math.round((Math.random() * (300 - 150)) + 150);
     }
 
     ///Print all the passengers
-    public static String printTicketsFlight(List<FlightTicket> flightTickets, Flight flight) {
-        if (flightTickets == null) {
+    public static String printTicketsFlight(List<Passenger> passengers, Flight flight) {
+        if (flight == null) return "E R R O R Flight not exist.";
+        if (passengers == null) {
             return "E R R O R Ticket not exist.";
-        } else if (flightTickets.isEmpty()) {
+        } else if (passengers.isEmpty()) {
             return "No tickets added to the fight";
         } else {
             StringBuilder stringOfPassengers = new StringBuilder();
-            stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
-            stringOfPassengers.append("to: ").append(flight.getArrivalCity().getCityName()).append("\n");
-            for (FlightTicket ticket : flightTickets) {
-                if (ticket.isStatus()) {
-                    int i = 1;
-                    stringOfPassengers.append("[").append(i).append("] ");
-                    stringOfPassengers.append("\tName: ");
-                    stringOfPassengers.append(ticket.getMainPassenger().getName());
-                    stringOfPassengers.append("  Dni: ");
-                    stringOfPassengers.append(ticket.getMainPassenger().getDni());
-                    stringOfPassengers.append("\n");
-                }
+            for (Passenger p : passengers) {
+                int i = 1;
+                stringOfPassengers.append("[").append(i).append("] ");
+                stringOfPassengers.append("\tPassenger: ");
+                stringOfPassengers.append(p.getName() + " " + p.getLastName() + " " + p.getDni());
+                stringOfPassengers.append("\n");
+
             }
-            return "\nPassengers of the Flight "+ ":\n" + stringOfPassengers.toString();
+            stringOfPassengers.append("from: ").append(flight.getDepartureCity().getCityName()).append("\n");
+            stringOfPassengers.append("to: " + flight.getArrivalCity().getCityName() + "\n");
+
+            return "\nPassengers of the Flight " + ":\n" + stringOfPassengers.toString();
         }
     }
 
-    public static Flight searchFlightPerID(String id, LinkedList<Flight> flights)
-    {
+    public static Flight searchFlightPerID(String id, LinkedList<Flight> flights) {
         Flight flight = null;
-        for (Flight currentFlight : flights){
-            if(currentFlight.getId().equalsIgnoreCase(id)){
-                flight=currentFlight;
+        for (Flight currentFlight : flights) {
+            if (currentFlight.getId().equalsIgnoreCase(id)) {
+                flight = currentFlight;
             }
         }
         return flight;
     }
+
+    public static boolean checkAge(int age) {
+        return (age > 0) && (age < 100);
+    }
+
+    public static boolean checkDni(String dni) {
+        return (dni.length() > 6) && (dni.length() < 9);
+    }
+
 }
