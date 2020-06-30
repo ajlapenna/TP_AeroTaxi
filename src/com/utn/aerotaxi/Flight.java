@@ -75,24 +75,7 @@ public class Flight implements Serializable {
      * than the maximum capacity of the airplane. And is the capacity is full the Flight is gone.
      *
      * @param ticket = Current ticket
-     * @return TRUE = flight ticket added.
-     * FALSE = flight ticket doesn't added
      */
-  /*  public boolean  addFlightTicket(FlightTicket ticket) {
-        if (ticket == null) {
-            return false;
-        } else {
-            if (ticket.getNumberOfPassengers() + countOfPassengers <= airplane.getMaxPassengerCapacity()) {
-                flightTickets.add(ticket);
-                passengers.add(ticket.getMainPassenger());
-                countOfPassengers += ticket.getNumberOfPassengers();
-                if (countOfPassengers == airplane.getMaxPassengerCapacity())
-                    this.isGone = true;
-                return true;
-            } else return false;
-        }
-    }
-*/
     public void addFlightTicket(FlightTicket ticket) {
         if (ticket != null)
             flightTickets.add(ticket);

@@ -126,18 +126,9 @@ public class FlightTicket implements Serializable {
 
     }
 
-//    @Override
-//    public String toString() {
-//        return "FlightTicket{" +
-//                "flightID=" + flightID +
-//                ", departing=" + departing +
-//                ", departureCity=" + departureCity +
-//                ", arrivalCity=" + arrivalCity +
-//                ", numberOfPassengers=" + numberOfPassengers +
-//                ", totalTicketCost=" + totalTicketCost +
-//                '}';
-//    }
-
+    public String getAirplaneFleet(){
+        return airplane.getClass().getSimpleName();
+    }
 
     @Override
     public String toString() {

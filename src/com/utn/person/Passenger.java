@@ -5,6 +5,7 @@ import com.utn.aerotaxi.FlightTicket;
 import com.utn.airplanes.BronzeFleet;
 import com.utn.airplanes.GoldFleet;
 import com.utn.airplanes.SilverFleet;
+import com.utn.tools.Toolbox;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -58,15 +59,17 @@ public class Passenger extends Person {
     }
 
     public void setBestAirplane() {
+        int b = 0, s = 0, g = 0;
         if (!flightTickets.isEmpty()) {
             for (FlightTicket f : flightTickets) {
                 if (f.getAirplane() instanceof BronzeFleet)
-                    bestAirplane = "Bronze";
+                    b++;
                 else if (f.getAirplane() instanceof SilverFleet)
-                    bestAirplane = "Silver";
+                    s++;
                 else if (f.getAirplane() instanceof GoldFleet)
-                    bestAirplane = "Gold";
+                    g++;
             }
+            bestAirplane=((b>s)&&(b>g))? "Bronze":((s>g)&&(s>b))? "Silver": "Gold";
         }
     }
 
@@ -79,8 +82,10 @@ public class Passenger extends Person {
     }
 
     public void addFlight(FlightTicket f) {
-        if (f != null)
+        if (f != null) {
             flightTickets.add(f);
+            setBestAirplane();
+        }
     }
 
     public FlightTicket searchTicketForId(String id) {
@@ -109,9 +114,10 @@ public class Passenger extends Person {
 
     @Override
     public String toString() {
+        setBestAirplane();
         return super.toString() +
                 " totalSpend=" + totalSpend +
                 ", bestAirplane='" + bestAirplane + '\'' +
-                ", flights=" + flightTickets;
+                ", flights=" + Toolbox.printFlightPassenger(flightTickets);
     }
 }

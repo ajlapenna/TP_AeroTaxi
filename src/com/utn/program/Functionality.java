@@ -32,6 +32,8 @@ public class Functionality {
         com = company;
     }
 
+    public static void setCom(Company company){com=company;}
+
     public static void startupMenu() {
         int option = -1;
         do {
@@ -111,11 +113,13 @@ public class Functionality {
                 do {
                     System.out.print("Ingrese su edad: ");
                     newPerson.setAge(scan.nextInt());
+                    scan.nextLine();
                 } while (!Toolbox.checkAge(newPerson.getAge()));
                 scan.nextLine();
                 do {
                     System.out.print("Ingrese su DNI: ");
                     newPerson.setDni(scan.nextLine());
+                    scan.nextLine();
                 } while (!Toolbox.checkDni(newPerson.getDni()));
                 scan.nextLine();
                 System.out.print("Ingrese una contraseña: ");
@@ -144,10 +148,12 @@ public class Functionality {
                 do {
                     System.out.print("Ingrese su edad: ");
                     newPerson.setAge(scan.nextInt());
+                    scan.nextLine();
                 } while (!Toolbox.checkAge(newPerson.getAge()));
                 do {
                     System.out.print("Ingrese su DNI: ");
                     newPerson.setDni(scan.nextLine());
+                    scan.nextLine();
                 } while (!Toolbox.checkDni(newPerson.getDni()));
                 System.out.print("Ingrese una contraseña: ");
                 newPerson.setPassword(scan.nextLine());
@@ -208,7 +214,7 @@ public class Functionality {
     }
 
     public static void menuAdmin(Admin a) {
-        //TODO
+
         int flag = 0, option = 0;
         try {
             do {
@@ -221,31 +227,30 @@ public class Functionality {
                 option = scan.nextInt();
 
                 switch (option) {
-                    case 1:
+                    case 1 -> {
                         System.out.println("Listar vuelos:");
                         System.out.println(com.showAllFlights());
-                        break;
-                    case 2:
+                    }
+                    case 2 -> {
                         System.out.println("Listar vuelos por fecha:");
                         LocalDate currentDate = insertDepartingDate();
                         System.out.println("Listar vuelos por fecha:");
                         System.out.println(com.showAllFlightsByDay(currentDate));
-                        break;
-                    case 3:
+                    }
+                    case 3 -> {
                         System.out.println("Listar Pasajeros:");
                         System.out.println(com.showAllPassengers());
-                        break;
-                    case 4:
+                    }
+                    case 4 -> {
                         System.out.println("Crear nuevo Admin:");
                         Admin newAdm = signUpAdmin();
                         com.addUser(newAdm);
-                        break;
-                    case 0:
+                    }
+                    case 0 -> {
                         flag = 1;
                         startupMenu();
-                        break;
-                    default:
-                        throw new IllegalStateException("Unexpected value: " + option);
+                    }
+                    default -> throw new IllegalStateException("Unexpected value: " + option);
                 }
             } while (flag == 0);
         } catch (InputMismatchException ex) {
@@ -372,16 +377,19 @@ public class Functionality {
 
     private static LocalDate insertDepartingDate() {
         LocalDate date = null;
-        try {
-            scan.nextLine();
-            System.out.println("Introduzca la fecha con formato dd/mm/yyyy");
-            String fechaComoTexto = scan.nextLine();
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-            date = LocalDate.parse(fechaComoTexto, formatter);
-        } catch (DateTimeParseException e) {
-            System.out.println("La fecha ingresada es inválida, por favor inténtelo nuevamente");
-        }
-
+        boolean flag= true;
+        scan.nextLine();
+        do {
+            try {
+                System.out.println("Introduzca la fecha con formato dd/mm/yyyy");
+                String fechaComoTexto = scan.nextLine();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+                date = LocalDate.parse(fechaComoTexto, formatter);
+            } catch (DateTimeParseException e) {
+                System.out.println("La fecha ingresada es inválida, por favor inténtelo nuevamente");
+                flag=false;
+            }
+        }while (!flag);
         return date;
     }
 

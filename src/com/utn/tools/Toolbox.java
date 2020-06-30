@@ -5,6 +5,7 @@ import com.utn.aerotaxi.FlightTicket;
 import com.utn.person.Passenger;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -75,4 +76,18 @@ public class Toolbox implements Serializable {
         return (dni.length() > 6) && (dni.length() < 9);
     }
 
+    public static String printFlightPassenger(ArrayList<FlightTicket> flights){
+        StringBuilder showFlights = new StringBuilder();
+        int i =0;
+        for (FlightTicket currentFlight : flights) {
+            showFlights.append("["+i+"]");
+            showFlights.append(currentFlight.getAirplaneFleet());
+            showFlights.append(" Salida:"+currentFlight.getDeparting());
+            showFlights.append(" Desde:"+currentFlight.getDepartureCity());
+            showFlights.append(" Hasta:"+currentFlight.getArrivalCity());
+            showFlights.append("\n");
+            i++;
+        }
+        return showFlights.toString();
+    }
 }
